@@ -4,15 +4,16 @@ version := "0.1"
 
 scalaVersion := "2.13.1"
 
-javacOptions in Compile += "--enable-preview"
-javacOptions in Compile ++= Seq("-source", "13", "-target", "13", "-Xlint")
+lazy val javaVersionRequired = "13"
+
+javacOptions ++= Seq("--enable-preview", "-source", javaVersionRequired)
 javaOptions += "--enable-preview"
 
 initialize := {
     val _ = initialize.value
     val javaVersion = sys.props("java.specification.version")
-    if (javaVersion != "13")
-        sys.error("Java 13 is required for this project. Found " + javaVersion + " instead")
+    if (javaVersion != javaVersionRequired)
+        sys.error("Java " + javaVersionRequired +" is required for this project. Found " + javaVersion + " instead")
 }
 
 lazy val roasterVersion = "2.21.1.Final"
