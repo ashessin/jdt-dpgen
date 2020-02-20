@@ -4,6 +4,7 @@ version := "0.1"
 
 scalaVersion := "2.13.1"
 
+lazy val roasterVersion = "2.21.1.Final"
 lazy val javaVersionRequired = "13"
 
 javacOptions ++= Seq("--enable-preview", "-source", javaVersionRequired)
@@ -16,7 +17,7 @@ initialize := {
         sys.error("Java " + javaVersionRequired +" is required for this project. Found " + javaVersion + " instead")
 }
 
-lazy val roasterVersion = "2.21.1.Final"
+fork := true
 
 libraryDependencies ++= Seq(
     // https://mvnrepository.com/artifact/org.jboss.forge.roaster/roaster-api
