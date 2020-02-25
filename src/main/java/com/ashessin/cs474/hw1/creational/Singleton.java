@@ -22,14 +22,6 @@ import org.jboss.forge.roaster.model.source.JavaClassSource;
  *     </ul>
  *
  * <p>
- *     Some Use Cases include
- *     <ul>
- *         <li>The logging class</li>
- *         <li>Managing a connection to a database</li>
- *         <li>Cache management</li>
- *     </ul>
- *
- * <p>
  *     Examples:
  *     <a target="_blank"
  *     href="https://docs.oracle.com/javase/8/docs/api/java/awt/Desktop.html#getDesktop--">
@@ -45,6 +37,7 @@ public class Singleton {
 
     public static void main(String[] args) {
         final JavaClassSource singletonClass = Roaster.create(JavaClassSource.class);
+
         singletonClass.setPackage("com.gof.creational.singleton").setName("Singleton")
                 .getJavaDoc().setFullText("""
                 The Singleton design pattern is a Creational Pattern.
@@ -54,32 +47,36 @@ public class Singleton {
                 object, useful for cases when the object is sharable. e.g., a database
                 connection.
                 </p>""");
+
         singletonClass.addProperty(singletonClass.getName(), "instance").removeMutator();
         singletonClass.getProperty("instance").getField()
                 .setStatic(Boolean.TRUE)
                 .getJavaDoc().setFullText("""
                 The field for storing the singleton instance should be declared {@code static}.""");
-        singletonClass.getProperty("instance")
-                .getAccessor()
+
+        singletonClass.getProperty("instance").getAccessor()
                 .setStatic(Boolean.TRUE)
                 .setSynchronized(Boolean.TRUE)
                 .setBody("""
-                if(instance == null) {
-                    instance = new Singleton();
-                }
-                return instance;""")
+                        if(instance == null) {
+                            instance = new Singleton();
+                        }
+                        return instance;""")
                 .getJavaDoc().setFullText("""
                 The {@code static} method which controls access to the singleton instance.
 
                 <p>
-                This is a thread safe method through the use of {@code synchronized} keyword.
-                Additionally, lazy initialization is used since the singleton won't be created unless
-                required via first call to this method.
+                This is a thread safe method using {@code synchronized} keyword.
+                Additionally, lazy initialization is used and the singleton instance won't be
+                created unless required via first call to this method.
                 </p>
 
                 @return the instance of class""");
 
-        singletonClass.addMethod().setConstructor(Boolean.TRUE).setPrivate().setBody("")
+        singletonClass.addMethod()
+                .setConstructor(Boolean.TRUE)
+                .setPrivate()
+                .setBody("")
                 .getJavaDoc().setFullText("""
                 The constructor should be private to prevent use of {@code new} operator.""");
 
