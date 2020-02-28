@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/sbt,java,scala,intellij,code-java,intellij+all,intellij+iml
-# Edit at https://www.gitignore.io/?templates=sbt,java,scala,intellij,code-java,intellij+all,intellij+iml
+# Created by https://www.gitignore.io/api/java,gradle,java-web,intellij,code-java,intellij+all,intellij+iml
+# Edit at https://www.gitignore.io/?templates=java,gradle,java-web,intellij,code-java,intellij+all,intellij+iml
 
 ### Code-Java ###
 # Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
@@ -226,21 +226,27 @@ modules.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-### SBT ###
-# Simple Build Tool
-# http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
-
-dist/*
+### Java-Web ###
+## ignoring target file
 target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
-.history
-.cache
-.lib/
 
-### Scala ###
-*.metals
+### Gradle ###
+.gradle
+build/
 
-# End of https://www.gitignore.io/api/sbt,java,scala,intellij,code-java,intellij+all,intellij+iml
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+### Gradle Patch ###
+**/build/
+
+# End of https://www.gitignore.io/api/java,gradle,java-web,intellij,code-java,intellij+all,intellij+iml
