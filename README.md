@@ -189,7 +189,10 @@ helper classes are employed from the `com.ashessin.cs474.hw1.utils` package. Onc
 has been performed, the files are written to the user defined location. The serialization and file 
 write operations are done in parallel for multiple files. There's also an attempt to initialize the 
 root folder of generated files as a maven project. The project may be further converted to scala 
-language through the use of the `scalagen` plugin.
+language through the use of the `scalagen` plugin. Note that the scala conversion is automatic and 
+might have some deficiencies in the implementation. The conversion might also fail at times since the 
+upstream project has not been updated in years. However, for the most part the conversion goes
+through without any issues.
 
 13:55:24.161 |     main | INFO  | essin.cs474.hw1.utils.FileAuthor | Attempting to write new file: src/main/resources/dpgen-output/src/main/java/com/gof/creational/builder/Builder.java
 13:55:24.164 | worker-1 | INFO  | essin.cs474.hw1.utils.FileAuthor | Attempting to write new file: src/main/resources/dpgen-output/src/main/java/com/gof/creational/builder/Employee.java
