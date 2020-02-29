@@ -8,6 +8,7 @@ public class FlyweightGen extends DesignPatternGen {
 	private static final String OPERATION = "operation";
 	private static final String EXTRINSIC_STATE = "extrinsicState";
 	private static final String INTRINSIC_STATE = "intrinsicState";
+	private static final String OBJECT = "Object";
 	private String packageName;
 	private String flyweightName;
 	private String concreteFlyweightName;
@@ -30,7 +31,7 @@ public class FlyweightGen extends DesignPatternGen {
 		DpInterfaceSource flyweight = DpInterfaceSource.newBuilder(packageName, flyweightName)
 				.addMethod(DpSourceMethod.newBuilder()
 						.setName(OPERATION)
-						.addParameter(EXTRINSIC_STATE, "Object")
+						.addParameter(EXTRINSIC_STATE, OBJECT)
 						.setBody(";")
 						.build())
 				.build();
@@ -39,12 +40,12 @@ public class FlyweightGen extends DesignPatternGen {
 
 		DpClassSource concreteFlyweight = DpClassSource.newBuilder(packageName, concreteFlyweightName)
 				.addImplementsInterface(flyweightName)
-				.addField(DpSourceField.newBuilder(INTRINSIC_STATE, "Object")
+				.addField(DpSourceField.newBuilder(INTRINSIC_STATE, OBJECT)
 						.setGetter(Boolean.TRUE)
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
 						.setIsConstructor(Boolean.TRUE)
-						.addParameter(INTRINSIC_STATE, "Object")
+						.addParameter(INTRINSIC_STATE, OBJECT)
 						.setBody(String.format("this.%s = %s;",
 								INTRINSIC_STATE, INTRINSIC_STATE))
 						.build())
@@ -56,12 +57,12 @@ public class FlyweightGen extends DesignPatternGen {
 
 		DpClassSource unsharedConcreteFlyweight = DpClassSource.newBuilder(packageName, unsharedFlyweightName)
 				.addImplementsInterface(flyweightName)
-				.addField(DpSourceField.newBuilder(STATE, "Object")
+				.addField(DpSourceField.newBuilder(STATE, OBJECT)
 						.setGetter(Boolean.TRUE)
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
 						.setIsConstructor(Boolean.TRUE)
-						.addParameter(STATE, "Object")
+						.addParameter(STATE, OBJECT)
 						.setBody(String.format("this.%s = %s;",
 								STATE, STATE))
 						.build())

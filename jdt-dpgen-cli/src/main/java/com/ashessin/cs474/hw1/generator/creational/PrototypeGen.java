@@ -1,8 +1,6 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
 import com.ashessin.cs474.hw1.generator.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -10,9 +8,6 @@ import java.util.stream.Collectors;
 
 public class PrototypeGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(PrototypeGen.class);
-	private static final String ABSTRACT = "Abstract";
-	private static final String CONCRETE = "Concrete";
 	private static final String ORIGINAL = "original";
 	private static final String COPY = "copy";
 	private String packageName;
@@ -32,8 +27,10 @@ public class PrototypeGen extends DesignPatternGen {
 
 	public DpArrayList<DpSource> main() {
 
-		DpSourceMethod abstractCopyMethod = DpSourceMethod.newBuilder().setName(COPY).setReturnType(this.abstractPrototypeName).build();
-		DpInterfaceSource abstractProptotype = DpInterfaceSource.newBuilder(this.packageName, this.abstractPrototypeName)
+		DpSourceMethod abstractCopyMethod =
+				DpSourceMethod.newBuilder().setName(COPY).setReturnType(this.abstractPrototypeName).build();
+		DpInterfaceSource abstractProptotype = DpInterfaceSource.newBuilder(this.packageName,
+				this.abstractPrototypeName)
 				.addMethod(abstractCopyMethod)
 				.build();
 

@@ -8,9 +8,9 @@ import static java.util.stream.Collectors.toList;
 
 public class BridgeGen extends DesignPatternGen {
 
-	private static final String CONCRETE = "Concrete";
 	private static final String OPERATION = "operation";
 	private static final String IMPLEMENTATION = "implementation";
+	private static final String STRING = "String";
 	private String packageName;
 	private String abstractionName;
 	private String refinedAbstractionName;
@@ -40,7 +40,7 @@ public class BridgeGen extends DesignPatternGen {
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
 						.addModifier(DpSourceMethod.Modifier.ABSTRACT)
-						.setReturnType("String")
+						.setReturnType(STRING)
 						.setName(OPERATION)
 						.build())
 				.build();
@@ -49,7 +49,7 @@ public class BridgeGen extends DesignPatternGen {
 
 		DpInterfaceSource implementor = DpInterfaceSource.newBuilder(packageName, implementorName)
 				.addMethod(DpSourceMethod.newBuilder()
-						.setReturnType("String")
+						.setReturnType(STRING)
 						.setName(IMPLEMENTATION)
 						.build())
 				.build();
@@ -65,8 +65,7 @@ public class BridgeGen extends DesignPatternGen {
 						.build())
 				.collect(toList());
 
-
-		// concreteImplementors.forEach(RoasterParser::makeSource);
+		dpSources.add(concreteImplementors, this.getClass());
 
 		DpClassSource refinedAbstraction = DpClassSource.newBuilder(packageName, refinedAbstractionName)
 				.setExtendsClass(abstractionName)
@@ -76,7 +75,7 @@ public class BridgeGen extends DesignPatternGen {
 						.setBody(String.format("super(%s);", implementorName.toLowerCase()))
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
-						.setReturnType("String")
+						.setReturnType(STRING)
 						.setName(OPERATION)
 						.setIsInherited(Boolean.TRUE)
 						.setBody(String.format("return this.%s.%s();",

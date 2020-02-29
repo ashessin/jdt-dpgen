@@ -1,15 +1,12 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChainOfResponsibilityGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(ChainOfResponsibilityGen.class);
 	private static final String HANDLE_REQUEST = "handleRequest";
 	private static final String INVOKED = "Invoked";
 	private String packageName;

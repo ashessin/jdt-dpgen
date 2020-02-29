@@ -11,6 +11,7 @@ public class InterpreterGen extends DesignPatternGen {
 	private static final String OPERANDS = OPERAND + "s";
 	private static final String DATA = "data";
 	private static final String RESULT = "Result";
+	private static final String BOOLEAN = "boolean";
 	private String packageName;
 	private String contextName;
 	private String abstractExpressionName;
@@ -73,12 +74,12 @@ public class InterpreterGen extends DesignPatternGen {
 
 		DpClassSource terminalExpression = DpClassSource.newBuilder(packageName, terminalExpressionName)
 				.setExtendsClass(abstractExpressionName)
-				.addField(DpSourceField.newBuilder(DATA, "boolean")
+				.addField(DpSourceField.newBuilder(DATA, BOOLEAN)
 						.setAccessModifier(DpSourceField.AccessModifier.PRIVATE)
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
 						.setIsConstructor(Boolean.TRUE)
-						.addParameter(DATA, "boolean")
+						.addParameter(DATA, BOOLEAN)
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
 						.setName(INTERPRET)
@@ -101,7 +102,7 @@ public class InterpreterGen extends DesignPatternGen {
 						.setSetter(Boolean.TRUE)
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
-						.setReturnType("boolean")
+						.setReturnType(BOOLEAN)
 						.setName("is" + RESULT)
 						.setBody(String.format("return %s;", RESULT.toLowerCase()))
 						.build())
@@ -117,7 +118,8 @@ public class InterpreterGen extends DesignPatternGen {
 		return dpSources;
 	}
 
-	private DpClassSource getInterpreter(DpClassSource abstractExpression, String orInterpreterMethodBody, String orTerminalExpressionName) {
+	private DpClassSource getInterpreter(DpClassSource abstractExpression, String orInterpreterMethodBody,
+										 String orTerminalExpressionName) {
 		return DpClassSource.newBuilder(packageName, orTerminalExpressionName)
 				.setExtendsClass(abstractExpressionName)
 				.addField(DpSourceField.newBuilder(FIRST + abstractExpressionName, abstractExpressionName)

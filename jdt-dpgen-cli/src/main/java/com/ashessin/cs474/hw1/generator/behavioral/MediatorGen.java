@@ -118,7 +118,8 @@ public class MediatorGen extends DesignPatternGen {
 								.build())
 						.addMethod(DpSourceMethod.newBuilder(colleague.getMethods().get(1))
 								.setBody(String.format("this.%s.%s(this, %s);",
-										mediatorName.toLowerCase(), NOTIFY + colleagueName, mediatorName.toLowerCase()))
+										mediatorName.toLowerCase(), NOTIFY + colleagueName,
+										mediatorName.toLowerCase()))
 								.build())
 						.addMethod(DpSourceMethod.newBuilder(colleague.getMethods().get(2))
 								.setBody(String.format("this.set%s(%s);",
