@@ -21,14 +21,14 @@ public class DpSourceParserRoasterTest {
 							"}";
 
 		DpClassSource dpHelloWorld = DpClassSource.newBuilder("com.app", "HelloWorld")
-			.addMethod(DpSourceMethod.newBuilder()
-				.setName("main")
-				.setAccessModifier(DpSourceMethod.AccessModifier.PUBLIC)
-				.addModifier(DpSourceMethod.Modifier.STATIC)
-				.addParameter("args", "String[]")
-				.setBody("System.out.println(\"Hello World!\");")
-				.build())
-			.build();
+				.addMethod(DpSourceMethod.newBuilder()
+						.setName("main")
+						.setAccessModifier(DpSourceMethod.AccessModifier.PUBLIC)
+						.addModifier(DpSourceMethod.Modifier.STATIC)
+						.addParameter("args", "String[]")
+						.setBody("System.out.println(\"Hello World!\");")
+						.build())
+				.build();
 
 		String roasterHelloWorld = new String(new DpSourceParserRoaster().serialize(dpHelloWorld));
 
@@ -41,15 +41,15 @@ public class DpSourceParserRoasterTest {
 	@Test
 	public void checkMissingSemicolon() {
 		DpClassSource classWithSyntaxError = DpClassSource.newBuilder("com.app", "SyntaxError")
-			.addMethod(DpSourceMethod.newBuilder()
-				.setName("main")
-				.setAccessModifier(DpSourceMethod.AccessModifier.PUBLIC)
-				.addModifier(DpSourceMethod.Modifier.STATIC)
-				.addParameter("args", "String[]")
-				// missing semicolon
-				.setBody("System.out.println(\"Hello World!\")")
-				.build())
-			.build();
+				.addMethod(DpSourceMethod.newBuilder()
+						.setName("main")
+						.setAccessModifier(DpSourceMethod.AccessModifier.PUBLIC)
+						.addModifier(DpSourceMethod.Modifier.STATIC)
+						.addParameter("args", "String[]")
+						// missing semicolon
+						.setBody("System.out.println(\"Hello World!\")")
+						.build())
+				.build();
 
 		String serialized = new String(new DpSourceParserRoaster().serialize(classWithSyntaxError));
 

@@ -16,32 +16,32 @@ public class DpSourceFieldTest {
 	@Test
 	public void fieldWithDuplicateModifiers() {
 		Assertions.assertThrows(IllegalStateException.class, () ->
-			DpSourceField.newBuilder("testField", "Object")
-				.addModifier(DpSourceField.Modifier.FINAL)
-				.addModifier(DpSourceField.Modifier.FINAL)
-				.addModifier(DpSourceField.Modifier.STATIC)
-				.build());
+				DpSourceField.newBuilder("testField", "Object")
+						.addModifier(DpSourceField.Modifier.FINAL)
+						.addModifier(DpSourceField.Modifier.FINAL)
+						.addModifier(DpSourceField.Modifier.STATIC)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceField.newBuilder("testField", "Object")
-				.addModifier(DpSourceField.Modifier.FINAL)
-				.addModifier(DpSourceField.Modifier.NONE)
-				.build());
+				DpSourceField.newBuilder("testField", "Object")
+						.addModifier(DpSourceField.Modifier.FINAL)
+						.addModifier(DpSourceField.Modifier.NONE)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceField.newBuilder("testField", "Object")
-				.addModifier(DpSourceField.Modifier.STATIC)
-				.addModifier(DpSourceField.Modifier.NONE)
-				.build());
+				DpSourceField.newBuilder("testField", "Object")
+						.addModifier(DpSourceField.Modifier.STATIC)
+						.addModifier(DpSourceField.Modifier.NONE)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceField.newBuilder("testField", "Object")
-				.addModifier(DpSourceField.Modifier.FINAL)
-				.addModifier(DpSourceField.Modifier.STATIC)
-				.build());
+				DpSourceField.newBuilder("testField", "Object")
+						.addModifier(DpSourceField.Modifier.FINAL)
+						.addModifier(DpSourceField.Modifier.STATIC)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceField.newBuilder("testField", "Object")
-				.addModifier(DpSourceField.Modifier.NONE)
-				.build());
+				DpSourceField.newBuilder("testField", "Object")
+						.addModifier(DpSourceField.Modifier.NONE)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceField.newBuilder("testField", "Object")
-				.build());
+				DpSourceField.newBuilder("testField", "Object")
+						.build());
 	}
 }

@@ -16,38 +16,38 @@ public class DpSourceMethodTest {
 	@Test
 	public void fieldWithDuplicateModifiers() {
 		Assertions.assertThrows(IllegalStateException.class, () ->
-			DpSourceMethod.newBuilder()
-				.setName("testMethod")
-				.addModifier(DpSourceMethod.Modifier.FINAL)
-				.addModifier(DpSourceMethod.Modifier.FINAL)
-				.addModifier(DpSourceMethod.Modifier.STATIC)
-				.build());
+				DpSourceMethod.newBuilder()
+						.setName("testMethod")
+						.addModifier(DpSourceMethod.Modifier.FINAL)
+						.addModifier(DpSourceMethod.Modifier.FINAL)
+						.addModifier(DpSourceMethod.Modifier.STATIC)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceMethod.newBuilder()
-				.setName("testMethod")
-				.addModifier(DpSourceMethod.Modifier.FINAL)
-				.addModifier(DpSourceMethod.Modifier.NONE)
-				.build());
+				DpSourceMethod.newBuilder()
+						.setName("testMethod")
+						.addModifier(DpSourceMethod.Modifier.FINAL)
+						.addModifier(DpSourceMethod.Modifier.NONE)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceMethod.newBuilder()
-				.setName("testMethod")
-				.addModifier(DpSourceMethod.Modifier.STATIC)
-				.addModifier(DpSourceMethod.Modifier.NONE)
-				.build());
+				DpSourceMethod.newBuilder()
+						.setName("testMethod")
+						.addModifier(DpSourceMethod.Modifier.STATIC)
+						.addModifier(DpSourceMethod.Modifier.NONE)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceMethod.newBuilder()
-				.setName("testMethod")
-				.addModifier(DpSourceMethod.Modifier.FINAL)
-				.addModifier(DpSourceMethod.Modifier.STATIC)
-				.build());
+				DpSourceMethod.newBuilder()
+						.setName("testMethod")
+						.addModifier(DpSourceMethod.Modifier.FINAL)
+						.addModifier(DpSourceMethod.Modifier.STATIC)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceMethod.newBuilder()
-				.setName("testMethod")
-				.addModifier(DpSourceMethod.Modifier.NONE)
-				.build());
+				DpSourceMethod.newBuilder()
+						.setName("testMethod")
+						.addModifier(DpSourceMethod.Modifier.NONE)
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpSourceMethod.newBuilder()
-				.setName("testMethod")
-				.build());
+				DpSourceMethod.newBuilder()
+						.setName("testMethod")
+						.build());
 	}
 }

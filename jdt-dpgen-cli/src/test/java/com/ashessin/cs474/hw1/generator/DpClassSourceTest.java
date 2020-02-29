@@ -16,23 +16,23 @@ public class DpClassSourceTest {
 	@Test
 	public void classWithAbstractMethods() {
 		Assertions.assertThrows(IllegalStateException.class, () ->
-			DpClassSource.newBuilder("com.test", "TestClass")
-				.addMethod(DpSourceMethod.newBuilder()
-					.addModifier(DpSourceMethod.Modifier.ABSTRACT)
-					.build())
-				.build());
+				DpClassSource.newBuilder("com.test", "TestClass")
+						.addMethod(DpSourceMethod.newBuilder()
+								.addModifier(DpSourceMethod.Modifier.ABSTRACT)
+								.build())
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpClassSource.newBuilder("com.test", "TestClass")
-				.setModifier(DpClassSource.Modifier.ABSTRACT)
-				.addMethod(DpSourceMethod.newBuilder()
-					.addModifier(DpSourceMethod.Modifier.ABSTRACT)
-					.build())
-				.build());
+				DpClassSource.newBuilder("com.test", "TestClass")
+						.setModifier(DpClassSource.Modifier.ABSTRACT)
+						.addMethod(DpSourceMethod.newBuilder()
+								.addModifier(DpSourceMethod.Modifier.ABSTRACT)
+								.build())
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpClassSource.newBuilder("com.test", "TestClass")
-				.addMethod(DpSourceMethod.newBuilder()
-					.build())
-				.build());
+				DpClassSource.newBuilder("com.test", "TestClass")
+						.addMethod(DpSourceMethod.newBuilder()
+								.build())
+						.build());
 	}
 
 	/**
@@ -46,22 +46,22 @@ public class DpClassSourceTest {
 	@Test
 	public void classWithDuplicateFields() {
 		Assertions.assertThrows(IllegalStateException.class, () ->
-			DpClassSource.newBuilder("com.test", "TestClass")
-				.addField(DpSourceField.newBuilder("field", "Object")
-					.build())
-				.addField(DpSourceField.newBuilder("field", "Object")
-					.build())
-				.addField(DpSourceField.newBuilder("field3", "Object")
-					.build())
-				.build());
+				DpClassSource.newBuilder("com.test", "TestClass")
+						.addField(DpSourceField.newBuilder("field", "Object")
+								.build())
+						.addField(DpSourceField.newBuilder("field", "Object")
+								.build())
+						.addField(DpSourceField.newBuilder("field3", "Object")
+								.build())
+						.build());
 		Assertions.assertDoesNotThrow(() ->
-			DpClassSource.newBuilder("com.test", "TestClass")
-				.addField(DpSourceField.newBuilder("field1", "Object")
-					.build())
-				.addField(DpSourceField.newBuilder("field2", "Object")
-					.build())
-				.addField(DpSourceField.newBuilder("field3", "Object")
-					.build())
-				.build());
+				DpClassSource.newBuilder("com.test", "TestClass")
+						.addField(DpSourceField.newBuilder("field1", "Object")
+								.build())
+						.addField(DpSourceField.newBuilder("field2", "Object")
+								.build())
+						.addField(DpSourceField.newBuilder("field3", "Object")
+								.build())
+						.build());
 	}
 }
