@@ -53,19 +53,27 @@ public class FlyweightQ extends DesignPatternQ {
 		private static final String FLYWEIGHT_FACTORY_NAME = FLYWEIGHT_NAME + "Factory";
 		private static final String CONCRETE_FLYWEIGHT_NAME = "ConcreteFlyweight";
 		private static final String UNSHARED_FLYWEIGHT_NAME = "Unshared" + CONCRETE_FLYWEIGHT_NAME;
+
 		@CommandLine.Parameters(index = "0", paramLabel = "FlyweightName",
-				description = "The Flyweight interface defines interfaces through which flyweight can " +
-							  "receive and act on extrinsic states.")
+				description = "The Flyweight interface defines interfaces through which flyweight can receive and " +
+							  "act on extrinsic states.",
+				defaultValue = FLYWEIGHT_NAME)
 		static String flyweightName = FLYWEIGHT_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "FlyweightFactoryName",
-				description = "The FlyweightFactory class creates and manages the flyweight objects.")
+				description = "The FlyweightFactory class creates and manages the flyweight objects.",
+				defaultValue = FLYWEIGHT_FACTORY_NAME)
 		static String flyweightFactoryName = FLYWEIGHT_FACTORY_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ConcreteFlyweightName",
-				description = "The ConcreteFlyweight class implements Flyweight and adds storage " +
-							  "for intrinsic state (Character).")
+				description = "The ConcreteFlyweight class implements Flyweight and adds storage for intrinsic state" +
+							  " (Character).",
+				defaultValue = CONCRETE_FLYWEIGHT_NAME)
 		static String concreteFlyweightName = CONCRETE_FLYWEIGHT_NAME;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "UnsharedFlyweightName",
-				description = "The UnsharedConcreteFlyweight class defines objects which are not shared.")
+				description = "The UnsharedConcreteFlyweight class defines objects which are not shared.",
+				defaultValue = UNSHARED_FLYWEIGHT_NAME)
 		static String unsharedFlyweightName = UNSHARED_FLYWEIGHT_NAME;
 
 		private InputGroup() {

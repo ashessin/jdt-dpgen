@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "abstractfactory", version = "jdt-dpgen 0.1",
 		description = "Generates Abstract Factory creational design pattern. " +
-					  "Provide an interface for creating families of related or dependent objects " +
-					  "without specifying their concrete classes.",
+					  "Provide an interface for creating families of related or dependent objects without " +
+					  "specifying their concrete classes.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -83,18 +83,26 @@ public class AbstractFactoryQ extends DesignPatternQ {
 		private static final String CONCRETE_FACTORY_NAMES = "Factory1,Factory2";
 		private static final String ABSTRACT_PRODUCT_NAMES = "ProductA,ProductB";
 		private static final String CONCRETE_PRODUCT_NAMES = "ProductA1,ProductA2;ProductB1,ProductB2";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "AbstractFactoryName",
-				description = "The AbstractFactory defines the interface for creation of the abstract " +
-							  "product objects.")
+				description = "The AbstractFactory defines the interface for creation of the abstract product " +
+							  "objects.",
+				defaultValue = ABSTRACT_FACTORY_NAME)
 		static String abstractFactoryName = ABSTRACT_FACTORY_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteFactoryNames",
-				description = "The ConcreteFactory class implements factories based on AbstractFactory interfaces.")
+				description = "The ConcreteFactory class implements factories based on AbstractFactory interfaces.",
+				defaultValue = CONCRETE_FACTORY_NAMES)
 		static String concreteFactoryNames = CONCRETE_FACTORY_NAMES;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "AbstractProductNames",
-				description = "The AbstractProduct defines the interface for product objects.")
+				description = "The AbstractProduct defines the interface for product objects.",
+				defaultValue = ABSTRACT_PRODUCT_NAMES)
 		static String abstractProductNames = ABSTRACT_PRODUCT_NAMES;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteProductNames",
-				description = "The ConcreteProduct class implements products based on AbstractProduct interfaces.")
+				description = "The ConcreteProduct class implements products based on AbstractProduct interfaces.",
+				defaultValue = CONCRETE_PRODUCT_NAMES)
 		static String concreteProductNames = CONCRETE_PRODUCT_NAMES;
 
 		private InputGroup() {

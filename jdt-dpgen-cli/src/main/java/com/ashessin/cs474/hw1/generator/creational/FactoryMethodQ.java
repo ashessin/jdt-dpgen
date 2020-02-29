@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "factorymethod", version = "jdt-dpgen 0.1",
 		description = "Generates Factory Method creational design pattern. " +
-					  "Define an interface for creating an object, but let subclasses decide which " +
-					  "class to instantiate. Factory Method lets a class defer instantiation to subclass",
+					  "Define an interface for creating an object, but let subclasses decide which class to " +
+					  "instantiate. Factory Method lets a class defer instantiation to subclass",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -60,18 +60,26 @@ public class FactoryMethodQ extends DesignPatternQ {
 		private static final String CONCRETE_CREATOR_NAMES = "Creator1,Creator2";
 		private static final String ABSTRACT_PRODUCT_NAME = "Product";
 		private static final String CONCRETE_PRODUCT_NAMES = "Product1,Product2";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "AbstractCreatorName",
-				description = "The Creator abstract class declares the factory method interface.")
+				description = "The Creator abstract class declares the factory method interface.",
+				defaultValue = ABSTRACT_CREATOR_NAME)
 		static String abstractCreatorName = ABSTRACT_CREATOR_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteCreatorNames",
-				description = "The ConcreteCreator class implements the Creator's factory method " +
-							  "and returns an instance of the ConcreteProduct.")
-		static String concreteCreatorNames = CONCRETE_CREATOR_NAMES;
+				description = "The ConcreteCreator class implements the Creator's factory method and returns an " +
+							  "instance of the ConcreteProduct.",
+				defaultValue = CONCRETE_CREATOR_NAMES)
+		static String concreteCreatorNames;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "AbstractProductName",
-				description = "The Product interface defines the interface of objects the factory method creates.")
-		static String abstractProductName = ABSTRACT_PRODUCT_NAME;
+				description = "The Product interface defines the interface of objects the factory method creates.",
+				defaultValue = ABSTRACT_PRODUCT_NAME)
+		static String abstractProductName;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteProductNames",
-				description = "The ConcreteProduct class implements the Product interface.")
+				description = "The ConcreteProduct class implements the Product interface.",
+				defaultValue = CONCRETE_PRODUCT_NAMES)
 		static String concreteProductNames = CONCRETE_PRODUCT_NAMES;
 
 		private InputGroup() {

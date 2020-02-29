@@ -10,8 +10,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(name = "adapter", version = "jdt-dpgen 0.1",
 		description = "Generates Adapter structural design pattern. " +
-					  "Convert the interface of a class into another interface clients expect. " +
-					  "Adapter lets classes work together that couldn't otherwise because of incompatible interfaces.",
+					  "Convert the interface of a class into another interface clients expect. Adapter lets classes " +
+					  "work together that couldn't otherwise because of incompatible interfaces.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -52,14 +52,20 @@ public class AdapterQ extends DesignPatternQ {
 		private static final String ADAPTER_NAME = "Adapter";
 		private static final String ADAPTEE_NAME = "Adaptee";
 		private static final String TARGET_NAME = "Target";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "AdapterName",
-				description = "The Adapter class adapts interface Adaptee to the Target.")
+				description = "The Adapter class adapts interface Adaptee to the Target.",
+				defaultValue = ADAPTER_NAME)
 		static String adapterName = ADAPTER_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "AdapteeName",
-				description = "The Adaptee class defines an existing interface where adaption will be applied.")
+				description = "The Adaptee class defines an existing interface where adaption will be applied.",
+				defaultValue = ADAPTEE_NAME)
 		static String adapteeName = ADAPTEE_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "TargetName",
-				description = "The target interface defines the domain-specific interface used by the Client.")
+				description = "The target interface defines the domain-specific interface used by the Client.",
+				defaultValue = TARGET_NAME)
 		static String targetName = TARGET_NAME;
 
 		private InputGroup() {

@@ -55,19 +55,26 @@ public class CommandQ extends DesignPatternQ {
 		private static final String RECEIVER_NAME = "Receiver";
 		private static final String INVOKER_NAME = "Invoker";
 
+
 		@CommandLine.Parameters(index = "0", paramLabel = "CommandName",
-				description = "The Command declares an interface for executing an operation.")
+				description = "The Command declares an interface for executing an operation.",
+				defaultValue = COMMAND_NAME)
 		static String commandName = COMMAND_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteCommandName",
-				description = "The ConcreteCommand class defines the " +
-							  "binding between a Receiver object and an action.")
+				description = "The ConcreteCommand class defines the binding between a Receiver object and an action.",
+				defaultValue = CONCRETE_COMMAND_NAME)
 		static String concreteCommandNames = CONCRETE_COMMAND_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ReceiverName",
-				description = "The Receiver class knows how to perform the operations" +
-							  " associated with carrying out a request.")
+				description = "The Receiver class knows how to perform the operations associated with carrying out " +
+							  "a request.",
+				defaultValue = RECEIVER_NAME)
 		static String receiverNames = RECEIVER_NAME;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "InvokerName",
-				description = "The Invoker class sends the command to carry out a request.")
+				description = "The Invoker class sends the command to carry out a request.",
+				defaultValue = INVOKER_NAME)
 		static String abstractInvokerName = INVOKER_NAME;
 
 		private InputGroup() {

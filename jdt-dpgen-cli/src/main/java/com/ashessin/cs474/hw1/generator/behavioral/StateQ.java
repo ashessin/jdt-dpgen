@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "state", version = "jdt-dpgen 0.1",
 		description = "Generates State behavioral design pattern. " +
-					  "Allow an object to alter its behavior when its internal state changes. " +
-					  "The object will appear to change its class",
+					  "Allow an object to alter its behavior when its internal state changes. The object will " +
+					  "appear to change its class",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -58,17 +58,22 @@ public class StateQ extends DesignPatternQ {
 		private static final String CONCRETE_STATE_NAMES = "State1,State2,State3";
 		private static final String CONTEXT_NAME = "Context";
 
+
 		@CommandLine.Parameters(index = "0", paramLabel = "StateName",
-				description = "The State defines an interface for encapsulating the behavior " +
-							  "associated with a particular state of the Context.")
+				description = "The State defines an interface for encapsulating the behavior associated with a " +
+							  "particular state of the Context.",
+				defaultValue = STATE_NAME)
 		static String stateName = STATE_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteStateNames",
-				description = "The ConcreteState implements a behavior associated " +
-							  "with the state of the Context.")
+				description = "The ConcreteState implements a behavior associated with the state of the Context.",
+				defaultValue = CONCRETE_STATE_NAMES)
 		static String concreteStateNames = CONCRETE_STATE_NAMES;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ContextName",
-				description = "The Context class maintains an instance of a ConcreteState" +
-							  " subclass which defines the current state.")
+				description = "The Context class maintains an instance of a ConcreteState subclass which defines " +
+							  "the current state.",
+				defaultValue = CONTEXT_NAME)
 		static String contextName = CONTEXT_NAME;
 
 		private InputGroup() {

@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "mediator", version = "jdt-dpgen 0.1",
 		description = "Generates Mediator behavioral design pattern. " +
-					  "Define an object that encapsulates how a set of objects interact. Mediator promotes " +
-					  "loose coupling by keeping objects from referring to each other explicitly, " +
-					  "and it lets you vary their interaction independently.",
+					  "Define an object that encapsulates how a set of objects interact. Mediator promotes loose " +
+					  "coupling by keeping objects from referring to each other explicitly, and it lets you vary " +
+					  "their interaction independently.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -60,21 +60,29 @@ public class MediatorQ extends DesignPatternQ {
 		private static final String CONCRETE_MEDIATOR_NAME = "ConcreteMediator";
 		private static final String COLLEAGUE_NAME = "Colleague";
 		private static final String CONCRETE_COLLEAGUE_NAMES = "Colleague1,Colleague2";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "MediatorName",
-				description = "The Mediator defines an interface for communicating with Colleague objects.")
+				description = "The Mediator defines an interface for communicating with Colleague objects.",
+				defaultValue = MEDIATOR_NAME)
 		static String mediatorName = MEDIATOR_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteMediatorName",
-				description = "The ConcreteMediator implements cooperative behavior by coordinating the " +
-							  "Colleague objects.")
+				description = "The ConcreteMediator implements cooperative behavior by coordinating the Colleague " +
+							  "objects.",
+				defaultValue = CONCRETE_MEDIATOR_NAME)
 		static String concreteMediatorName = CONCRETE_MEDIATOR_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ColleagueName",
-				description = "A Colleague defines an interface for communication with another " +
-							  "Colleague via the Mediator.")
+				description = "A Colleague defines an interface for communication with another Colleague via the " +
+							  "Mediator.",
+				defaultValue = COLLEAGUE_NAME)
 		static String colleagueName = COLLEAGUE_NAME;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteColleagueNames",
-				description = "For the ConcreteColleague class, each Colleague class knows its Mediator " +
-							  "object, and each Colleague communicates with its mediator whenever it " +
-							  "would have otherwise communicated with another colleague.")
+				description = "For the ConcreteColleague class, each Colleague class knows its Mediator object, and " +
+							  "each Colleague communicates with its mediator whenever it would have otherwise " +
+							  "communicated with another colleague.",
+				defaultValue = CONCRETE_COLLEAGUE_NAMES)
 		static String concreteColleagueNames = CONCRETE_COLLEAGUE_NAMES;
 
 		private InputGroup() {

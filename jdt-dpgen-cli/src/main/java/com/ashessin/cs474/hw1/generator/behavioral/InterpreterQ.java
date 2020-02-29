@@ -10,8 +10,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(name = "interpreter", version = "jdt-dpgen 0.1",
 		description = "Generates Interpreter behavioral design pattern. " +
-					  "Given a language, define a representation for its grammar along with an " +
-					  "interpreter that uses the representation to interpret sentences in the language.",
+					  "Given a language, define a representation for its grammar along with an interpreter that " +
+					  "uses the representation to interpret sentences in the language.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -39,8 +39,8 @@ public class InterpreterQ extends DesignPatternQ {
 		String contextName = InputGroup.contextName;
 		String abstractExpressionName = InputGroup.abstractExpressionName;
 		String terminalExpressionName = InputGroup.terminalExpressionName;
-		String orTerminalExpressionName = InputGroup.OR_TERMINAL_EXPRESSION_NAME;
-		String andTerminalExpressionName = InputGroup.AND_TERMINAL_EXPRESSION_NAME;
+		String orTerminalExpressionName = InputGroup.orTerminalExpressionName;
+		String andTerminalExpressionName = InputGroup.andTerminalExpressionName;
 
 		// TODO: Add input validations
 
@@ -58,18 +58,27 @@ public class InterpreterQ extends DesignPatternQ {
 		private static final String AND_TERMINAL_EXPRESSION_NAME = "AndTerminalExpression";
 
 
-		@CommandLine.Parameters(index = "0", paramLabel = "ContextName")
+		@CommandLine.Parameters(index = "0", paramLabel = "ContextName",
+				defaultValue = CONTEXT_NAME)
 		static String contextName = CONTEXT_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "AbstractExpressionName",
-				description = "The AbstractExpresion defines interface for interpretation.")
+				description = "The AbstractExpresion defines interface for interpretation.",
+				defaultValue = ABSTRACT_EXPRESSION_NAME)
 		static String abstractExpressionName = ABSTRACT_EXPRESSION_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "TerminalExpressionName",
-				description = "The TerminalExpresion implements the AbstractExpression " +
-							  "for literal symbols in the grammar.")
+				description = "The TerminalExpresion implements the AbstractExpression for literal symbols in the " +
+							  "grammar.",
+				defaultValue = TERMINAL_EXPRESSION_NAME)
 		static String terminalExpressionName = TERMINAL_EXPRESSION_NAME;
-		@CommandLine.Parameters(index = "3", paramLabel = "OrTerminalExpressionName")
+
+		@CommandLine.Parameters(index = "3", paramLabel = "OrTerminalExpressionName",
+				defaultValue = OR_TERMINAL_EXPRESSION_NAME)
 		static String orTerminalExpressionName = OR_TERMINAL_EXPRESSION_NAME;
-		@CommandLine.Parameters(index = "4", paramLabel = "AndTerminalExpressionName")
+
+		@CommandLine.Parameters(index = "4", paramLabel = "AndTerminalExpressionName",
+				defaultValue = AND_TERMINAL_EXPRESSION_NAME)
 		static String andTerminalExpressionName = AND_TERMINAL_EXPRESSION_NAME;
 
 		private InputGroup() {

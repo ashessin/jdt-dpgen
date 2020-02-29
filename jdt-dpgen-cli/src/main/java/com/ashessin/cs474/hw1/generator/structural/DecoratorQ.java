@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "decorator", version = "jdt-dpgen 0.1",
 		description = "Generates Decorator structural design pattern. " +
-					  "Attach additional responsibilities to an object dynamically. Decorators " +
-					  "provide a flexible alternative to sub-classing for extending functionality.",
+					  "Attach additional responsibilities to an object dynamically. Decorators provide a flexible " +
+					  "alternative to sub-classing for extending functionality.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -49,7 +49,8 @@ public class DecoratorQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new DecoratorGen(packageName, decoratorName, concreteDecoratorNames, componentName, concreteComponentName).method();
+		return new DecoratorGen(packageName, decoratorName, concreteDecoratorNames, componentName,
+				concreteComponentName).method();
 
 	}
 
@@ -59,17 +60,25 @@ public class DecoratorQ extends DesignPatternQ {
 		private static final String CONCRETE_DECORATOR_NAMES = "DecoratorA,DecoratorB";
 		private static final String COMPONENT_NAME = "Component";
 		private static final String CONCRETE_COMPONENT_NAME = "Concrete" + COMPONENT_NAME;
+
 		@CommandLine.Parameters(index = "0", paramLabel = "DecoratorName",
-				description = "The Decorator abstract class holds reference to the Component object.")
+				description = "The Decorator abstract class holds reference to the Component object.",
+				defaultValue = DECORATOR_NAME)
 		static String decoratorName = DECORATOR_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteDecoratorNames",
-				description = "The ConcreteDecorator class adds new features to the Component object.")
+				description = "The ConcreteDecorator class adds new features to the Component object.",
+				defaultValue = CONCRETE_DECORATOR_NAMES)
 		static String concreteDecoratorNames = CONCRETE_DECORATOR_NAMES;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ComponentName",
-				description = "The Component defines interfaces for new features which will be added dynamically.")
+				description = "The Component defines interfaces for new features which will be added dynamically.",
+				defaultValue = COMPONENT_NAME)
 		static String componentName = COMPONENT_NAME;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteComponentNames",
-				description = "The ConcreteComponent class defines object where new features can be added.")
+				description = "The ConcreteComponent class defines object where new features can be added.",
+				defaultValue = CONCRETE_COMPONENT_NAME)
 		static String concreteComponentName = CONCRETE_COMPONENT_NAME;
 
 		private InputGroup() {

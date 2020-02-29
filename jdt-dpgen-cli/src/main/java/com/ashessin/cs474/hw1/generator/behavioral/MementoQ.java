@@ -10,8 +10,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(name = "memento", version = "jdt-dpgen 0.1",
 		description = "Generates Memento behavioral design pattern. " +
-					  "Without violating encapsulation, capture and externalize an object’s internal " +
-					  "state so that the object can be restored to this state later.",
+					  "Without violating encapsulation, capture and externalize an object’s internal state so that " +
+					  "the object can be restored to this state later.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -53,16 +53,22 @@ public class MementoQ extends DesignPatternQ {
 		private static final String CARETAKER_NAME = "Caretaker";
 		private static final String ORIGINATOR_NAME = "Originator";
 
+
 		@CommandLine.Parameters(index = "0", paramLabel = "MomentoName",
 				description = "The Memento stores the internal state of the Originator object and protects against " +
-							  "access by objects other than the Originator.")
+							  "access by objects other than the Originator.",
+				defaultValue = MOMENTO_NAME)
 		static String momentoName = MOMENTO_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "CaretakerName",
-				description = "The Caretaker class is responsible for Memento's safekeeping.")
+				description = "The Caretaker class is responsible for Memento's safekeeping.",
+				defaultValue = CARETAKER_NAME)
 		static String caretakerName = CARETAKER_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "OriginatorName",
-				description = "The Originator creates a Memento containing a snapshot of its current internal " +
-							  "state and uses the Memento to restore its previous internal state.")
+				description = "The Originator creates a Memento containing a snapshot of its current internal state " +
+							  "and uses the Memento to restore its previous internal state.",
+				defaultValue = ORIGINATOR_NAME)
 		static String originatorName = ORIGINATOR_NAME;
 
 		private InputGroup() {

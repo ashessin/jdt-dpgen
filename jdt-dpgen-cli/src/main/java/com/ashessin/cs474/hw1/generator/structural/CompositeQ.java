@@ -10,8 +10,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(name = "composite", version = "jdt-dpgen 0.1",
 		description = "Generates Composite structural design pattern. " +
-					  "Compose objects into tree structures to represent part-whole hierarchies. " +
-					  "Composite lets clients treat individual objects and compositions of objects uniformly.",
+					  "Compose objects into tree structures to represent part-whole hierarchies. Composite lets " +
+					  "clients treat individual objects and compositions of objects uniformly.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -52,18 +52,24 @@ public class CompositeQ extends DesignPatternQ {
 		private static final String COMPONENT_NAME = "Component";
 		private static final String COMPOSITE_NAME = "Composite";
 		private static final String LEAF_NAME = "Leaf";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "ComponentName",
-				description = "The Component abstract class declares the interface for objects in the " +
-							  "composition, implements default behavior for the interface common to all classes as " +
-							  "appropriate, and declares an interface for accessing and managing its child components.")
+				description = "The Component abstract class declares the interface for objects in the  composition, " +
+							  "implements default behavior for the interface common to all classes as appropriate, " +
+							  "and declares an interface for accessing and managing its child components.",
+				defaultValue = COMPONENT_NAME)
 		static String componentName = COMPONENT_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "CompositeName",
-				description = "The Composite class defines behavior for components having children, " +
-							  "stores the child components and implements the child-related operations in the " +
-							  "Component interface.")
+				description = "The Composite class defines behavior for components having children, stores the " +
+							  "child components and implements the child-related operations in the Component " +
+							  "interface.",
+				defaultValue = COMPOSITE_NAME)
 		static String compositeName = COMPOSITE_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "LeafName",
-				description = "The Leaf class represents leaf objects in the composition.")
+				description = "The Leaf class represents leaf objects in the composition.",
+				defaultValue = LEAF_NAME)
 		static String leafName = LEAF_NAME;
 
 		private InputGroup() {

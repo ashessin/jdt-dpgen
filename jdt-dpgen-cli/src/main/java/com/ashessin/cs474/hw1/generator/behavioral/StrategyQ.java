@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "strategy", version = "jdt-dpgen 0.1",
 		description = "Generates Strategy behavioral design pattern. " +
-					  "Define a family of algorithms, encapsulate each one, and make them interchangeable. " +
-					  "Strategy lets the algorithm vary independently from clients that use it.",
+					  "Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy " +
+					  "lets the algorithm vary independently from clients that use it.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -58,14 +58,20 @@ public class StrategyQ extends DesignPatternQ {
 		private static final String CONCRETE_STRATEGY_NAMES = "Strategy1,Strategy2,Strategy3";
 		private static final String CONTEXT_NAME = "Context";
 
-		@CommandLine.Parameters(index = "0", paramLabel = STRATEGY_NAME,
-				description = "The Strategy declares an interface common to all supported algorithms.")
+
+		@CommandLine.Parameters(index = "0", paramLabel = "StrategyName",
+				description = "The Strategy declares an interface common to all supported algorithms.",
+				defaultValue = STRATEGY_NAME)
 		static String strategyName = STRATEGY_NAME;
-		@CommandLine.Parameters(index = "1", paramLabel = CONCRETE_STRATEGY_NAMES,
-				description = "The ConcreteStrategy implements the algorithm using the Strategy interface.")
+
+		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteStrategyNames",
+				description = "The ConcreteStrategy implements the algorithm using the Strategy interface.",
+				defaultValue = CONCRETE_STRATEGY_NAMES)
 		static String concreteStrategyNames = CONCRETE_STRATEGY_NAMES;
-		@CommandLine.Parameters(index = "2", paramLabel = CONTEXT_NAME,
-				description = "The Context uses this interface to call the algorithm defined by a ConcreteStrategy.")
+
+		@CommandLine.Parameters(index = "2", paramLabel = "ContextName",
+				description = "The Context uses this interface to call the algorithm defined by a ConcreteStrategy.",
+				defaultValue = CONTEXT_NAME)
 		static String contextName = CONTEXT_NAME;
 
 		private InputGroup() {

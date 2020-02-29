@@ -14,8 +14,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "observer", version = "jdt-dpgen 0.1",
 		description = "Generates Observer behavioral design pattern. " +
-					  "Define a one-to-many dependency between objects so that when one object changes state, " +
-					  "all its dependents are notified and updated automatically.",
+					  "Define a one-to-many dependency between objects so that when one object changes state, all " +
+					  "its dependents are notified and updated automatically.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -59,21 +59,29 @@ public class ObserverQ extends DesignPatternQ {
 		private static final String CONCRETE_OBSERVER_NAMES = "Observer1,Observer2";
 		private static final String SUBJECT_NAME = "Subject";
 		private static final String CONCRETE_SUBJECT_NAME = "ConcreteSubject";
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ObserverName",
 				description = "The Observer defines an updating interface for objects which should be notified " +
-							  "of changes in a subject.")
+							  "of changes in a subject.",
+				defaultValue = OBSERVER_NAME)
 		static String observerName = OBSERVER_NAME;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteObserverNames",
-				description = "The ConcreteObserver maintains a reference to a ConcreteSubject object, " +
-							  "stores the state that should stay consistent with the subject's and implements the " +
-							  "Observer updating interface to keep its state consistent with the subject's.")
+				description = "The ConcreteObserver maintains a reference to a ConcreteSubject object, stores the " +
+							  "state that should stay consistent with the subject's and implements the Observer " +
+							  "updating interface to keep its state consistent with the subject's.",
+				defaultValue = CONCRETE_OBSERVER_NAMES)
 		static String concreteObserverNames = CONCRETE_OBSERVER_NAMES;
+
 		@CommandLine.Parameters(index = "0", paramLabel = "SubjectName",
-				description = "The Subject knows its observers.")
+				description = "The Subject knows its observers.",
+				defaultValue = SUBJECT_NAME)
 		static String subjectName = SUBJECT_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteSubjectNames",
 				description = "The ConcreteSubject stores the state of interest to ConcreteObserver objects and " +
-							  "sends notifications to its observers when its state changes.")
+							  "sends notifications to its observers when its state changes.",
+				defaultValue = CONCRETE_SUBJECT_NAME)
 		static String concreteSubjectName = CONCRETE_SUBJECT_NAME;
 
 		private InputGroup() {

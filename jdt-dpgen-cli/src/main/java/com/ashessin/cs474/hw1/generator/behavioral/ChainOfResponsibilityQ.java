@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "chainofresponsibility", version = "jdt-dpgen 0.1",
 		description = "Generates Chain Of Responsibility behavioral design pattern. " +
-					  "Avoid coupling the sender of a request to its receiver by giving more than one " +
-					  "object a chance to handle the request. Chain the receiving objects and pass the request " +
-					  "along the chain until an object handles it.",
+					  "Avoid coupling the sender of a request to its receiver by giving more than one object a " +
+					  "chance to handle the request. Chain the receiving objects and pass the request along the " +
+					  "chain until an object handles it.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -58,14 +58,20 @@ public class ChainOfResponsibilityQ extends DesignPatternQ {
 		private static final String HANDLER_NAME = "Handler";
 		private static final String HANDLER_FIELD_NAME = "succesor";
 		private static final String CONCRETE_HANDLER_NAMES = "HandlerA,HandlerB";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "HandlerName",
-				description = "A Handler defines interface for request handling.")
+				description = "A Handler defines interface for request handling.",
+				defaultValue = HANDLER_NAME)
 		static String handlerName = HANDLER_NAME;
-		@CommandLine.Parameters(index = "1", paramLabel = "HandlerFieldName")
+
+		@CommandLine.Parameters(index = "1", paramLabel = "HandlerFieldName",
+				defaultValue = HANDLER_FIELD_NAME)
 		static String handlerFieldName = HANDLER_FIELD_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ConcreteHandlerNames",
-				description = "The ConcreteHandler handles the request, can access the next " +
-							  "object in the chain and forward the request if necessary.")
+				description = "The ConcreteHandler handles the request, can access the next object in the chain and " +
+							  "forward the request if necessary.",
+				defaultValue = CONCRETE_HANDLER_NAMES)
 		static String concreteHandlerNames = CONCRETE_HANDLER_NAMES;
 
 		private InputGroup() {

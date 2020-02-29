@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "prototype", version = "jdt-dpgen 0.1",
 		description = "Generates Prototype creational design pattern. " +
-					  "Specify the kinds of objects to create using a prototypical instance, " +
-					  "and create new objects by copying this prototype.",
+					  "Specify the kinds of objects to create using a prototypical instance, and create new objects " +
+					  "by copying this prototype.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -65,14 +65,19 @@ public class PrototypeQ extends DesignPatternQ {
 		private static final String ABSTRACT_PROTOTYPE_NAME = "Prototype";
 		private static final String CONCRETE_PROTOTYPE_NAME = "ConcretePrototype";
 		private static final String PROPERTIES = "Object,property1;Object,property2";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "PrototypeName",
-				description = "The Prototype interface defines the copy() method.")
+				description = "The Prototype interface defines the copy() method.",
+				defaultValue = ABSTRACT_PROTOTYPE_NAME)
 		static String abstractPrototypeName = ABSTRACT_PROTOTYPE_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcretePrototypeName",
-				description = "The ConcretePrototype implements a Prototype interface and " +
-							  "has a copy constructor.")
+				description = "The ConcretePrototype implements a Prototype interface and has a copy constructor.",
+				defaultValue = CONCRETE_PROTOTYPE_NAME)
 		static String concretePrototypeName = CONCRETE_PROTOTYPE_NAME;
-		@CommandLine.Parameters(index = "2", paramLabel = "ConcretePrototypeProperties")
+
+		@CommandLine.Parameters(index = "2", paramLabel = "ConcretePrototypeProperties",
+				defaultValue = PROPERTIES)
 		static String properties = PROPERTIES;
 
 		private InputGroup() {

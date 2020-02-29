@@ -51,17 +51,22 @@ public class ProxyQ extends DesignPatternQ {
 		private static final String PROXY_NAME = "Proxy";
 		private static final String SUBJECT_NAME = "Subject";
 		private static final String REAL_SUBJECT_NAME = "Real" + SUBJECT_NAME;
+
 		@CommandLine.Parameters(index = "0", paramLabel = "ProxyName",
 				description = "The Proxy class keeps reference to the real subject: it can act as a surrogate, " +
-							  "controlling access to the real subject and can be responsible for creation " +
-							  "and maintenance of the Real subject.")
+							  "controlling access to the real subject and can be responsible for creation and " +
+							  "maintenance of the Real subject.",
+				defaultValue = PROXY_NAME)
 		static String proxyName = PROXY_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "SubjectName",
-				description = "The Subject interface defines a common interface for the RealSubject " +
-							  "and the Proxy.")
+				description = "The Subject interface defines a common interface for the RealSubject and the Proxy.",
+				defaultValue = SUBJECT_NAME)
 		static String subjectName = SUBJECT_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "RealSubjectName",
-				description = "The RealSubject class points to the real object which the Proxy represents.")
+				description = "The RealSubject class points to the real object which the Proxy represents.",
+				defaultValue = REAL_SUBJECT_NAME)
 		static String realSubjectName = REAL_SUBJECT_NAME;
 
 		private InputGroup() {

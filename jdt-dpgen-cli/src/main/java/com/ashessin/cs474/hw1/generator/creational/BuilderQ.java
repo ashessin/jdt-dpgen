@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "builder", version = "jdt-dpgen 0.1",
 		description = "Generates Builder creational design pattern. " +
-					  "Separate the construction of a complex object from its representation " +
-					  "so that the same construction process can create different representations.",
+					  "Separate the construction of a complex object from its representation so that the same " +
+					  "construction process can create different representations.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -68,17 +68,26 @@ public class BuilderQ extends DesignPatternQ {
 		private static final String CONCRETE_BUILDER_NAME = "ConcreteBuilder";
 		private static final String CONCRETE_PRODUCT_NAME = "Product";
 		private static final String PROPERTIES = "Object,property1;Object,property2";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "BuilderName",
-				description = "The Builder specifies an abstract interface for creating parts of a Product object.")
+				description = "The Builder specifies an abstract interface for creating parts of a Product object.",
+				defaultValue = ABSTRACT_BUILDER_NAME)
 		static String abstractBuilderName = ABSTRACT_BUILDER_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteBuilderName",
-				description = "The ConcreteBuilder class constructs and assembles parts of the product, " +
-							  "implementing the Builder interface.")
+				description = "The ConcreteBuilder class constructs and assembles parts of the product, implementing" +
+							  " " +
+							  "the Builder interface.",
+				defaultValue = CONCRETE_BUILDER_NAME)
 		static String concreteBuilderName = CONCRETE_BUILDER_NAME;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ConcreteProductName",
-				description = "The Product class represents a complex object.")
+				description = "The Product class represents a complex object.",
+				defaultValue = CONCRETE_PRODUCT_NAME)
 		static String concreteProductName = CONCRETE_PRODUCT_NAME;
-		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteProductProperties")
+
+		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteProductProperties",
+				defaultValue = PROPERTIES)
 		static String properties = PROPERTIES;
 
 		private InputGroup() {

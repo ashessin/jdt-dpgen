@@ -50,12 +50,18 @@ public class SingletonQ extends DesignPatternQ {
 		private static final String SINGLETON_NAME = "Singleton";
 		private static final String SINGLETON_INSTANCE_NAME = "instance";
 		private static final String SINGLETON_ACCESSOR_NAME = "get" + SINGLETON_INSTANCE_NAME;
+
 		@CommandLine.Parameters(index = "0", paramLabel = "SingletonName",
-				description = "The singleton class should have only one active instance at any time.")
+				description = "The singleton class should have only one active instance at any time.",
+				defaultValue = SINGLETON_NAME)
 		static String singletonName = SINGLETON_NAME;
-		@CommandLine.Parameters(index = "1", paramLabel = "SingletonInstanceName")
+
+		@CommandLine.Parameters(index = "1", paramLabel = "SingletonInstanceName",
+				defaultValue = SINGLETON_INSTANCE_NAME)
 		static String singletonInstanceName = SINGLETON_INSTANCE_NAME;
-		@CommandLine.Parameters(index = "2", paramLabel = "SingletonAccessorName")
+
+		@CommandLine.Parameters(index = "2", paramLabel = "SingletonAccessorName",
+				defaultValue = SINGLETON_ACCESSOR_NAME)
 		static String singletonAccessorName = SINGLETON_ACCESSOR_NAME;
 
 		private InputGroup() {

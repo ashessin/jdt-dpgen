@@ -14,9 +14,8 @@ import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "visitor", version = "jdt-dpgen 0.1",
 		description = "Generates Visitor behavioral design pattern. " +
-					  "Represent an operation to be performed on the elements of an object structure. " +
-					  "Visitor lets you define a new operation without changing the classes of the elements " +
-					  "on which it operates.",
+					  "Represent an operation to be performed on the elements of an object structure. Visitor lets " +
+					  "you define a new operation without changing the classes of the elements on which it operates.",
 		mixinStandardHelpOptions = true,
 		showDefaultValues = true,
 		sortOptions = false
@@ -61,19 +60,27 @@ public class VisitorQ extends DesignPatternQ {
 		private static final String CONCRETE_VISITOR_NAMES = "Visitor1,Visitor2";
 		private static final String ELEMENT_NAME = "Element";
 		private static final String CONCRETE_ELEMENT_NAMES = "ElementA,ElementB";
+
 		@CommandLine.Parameters(index = "0", paramLabel = "VisitorName",
-				description = "The Visitor declares a Visit operation for each class " +
-							  "of ConcreteElements in the object structure.")
+				description = "The Visitor declares a Visit operation for each class ConcreteElements in the object " +
+							  "structure.",
+				defaultValue = VISITOR_NAME)
 		static String visitorName = VISITOR_NAME;
+
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteVisitorNames",
-				description = "The ConcreteVisitor implements each operation declared by the Visitor.")
+				description = "The ConcreteVisitor implements each operation declared by the Visitor.",
+				defaultValue = CONCRETE_VISITOR_NAMES)
 		static String concreteVisitorNames = CONCRETE_VISITOR_NAMES;
+
 		@CommandLine.Parameters(index = "2", paramLabel = "ElementName",
-				description = "The Element defines an Accept operation that takes a visitor as an argument.")
+				description = "The Element defines an Accept operation that takes a visitor as an argument.",
+				defaultValue = ELEMENT_NAME)
 		static String elementName = ELEMENT_NAME;
+
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteElementNames",
-				description = "The ConcreteElement implements an Accept operation that takes a visitor " +
-							  "as an argument.")
+				description = "The ConcreteElement implements an Accept operation that takes a visitor as an " +
+							  "margument.",
+				defaultValue = CONCRETE_ELEMENT_NAMES)
 		static String concreteElementNames = CONCRETE_ELEMENT_NAMES;
 
 		private InputGroup() {
