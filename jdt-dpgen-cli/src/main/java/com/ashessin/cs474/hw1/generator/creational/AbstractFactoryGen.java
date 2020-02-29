@@ -1,9 +1,6 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,9 +29,8 @@ import static java.util.stream.Collectors.toList;
  * href="http://docs.oracle.com/javase/8/docs/api/javax/xml/xpath/XPathFactory.html#newInstance--">
  * {@code javax.xml.xpath.XPathFactory#newInstance()}</a>
  */
-public class AbstractFactoryGen {
+public class AbstractFactoryGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(AbstractFactoryGen.class);
 	private static final String ABSTRACT = "Abstract";
 	private static final String CONCRETE = "Concrete";
 	private static final String CREATE = "create";
@@ -54,17 +50,11 @@ public class AbstractFactoryGen {
 
 	public DpArrayList<DpSource> main() {
 
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
-
 		Map<DpInterfaceSource, List<DpClassSource>> dpProducts = products.entrySet().stream()
 				.map(e -> makeDpProducts(e.getKey(), e.getValue())).collect(Collectors.toMap(
 						AbstractMap.SimpleEntry::getKey,
 						AbstractMap.SimpleEntry::getValue));
-		dpSources.addAll(dpProducts, this.getClass());
+		dpSources.add(dpProducts, this.getClass());
 
 		Stream<DpSourceMethod> dpCreateAbstractProductMethodStream = products.keySet().stream()
 				.map(this::createAbstractProductMethod);
@@ -88,7 +78,7 @@ public class AbstractFactoryGen {
 						.addImplementsInterface(ABSTRACT + abstractFactoryName)
 						.addMethods(dpCreateConcreteProductMethodStream.get(i)))
 				.map(DpClassSource.Builder::build).collect(toList());
-		dpSources.addAll(concreteFactories, this.getClass());
+		dpSources.add(concreteFactories, this.getClass());
 
 		return dpSources;
 	}

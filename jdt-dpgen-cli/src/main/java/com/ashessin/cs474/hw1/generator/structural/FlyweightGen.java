@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class FlyweightGen {
+public class FlyweightGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(FlyweightGen.class);
 	private static final String STATE = "state";
 	private static final String OPERATION = "operation";
 	private static final String EXTRINSIC_STATE = "extrinsicState";
@@ -30,12 +26,6 @@ public class FlyweightGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource flyweight = DpInterfaceSource.newBuilder(packageName, flyweightName)
 				.addMethod(DpSourceMethod.newBuilder()

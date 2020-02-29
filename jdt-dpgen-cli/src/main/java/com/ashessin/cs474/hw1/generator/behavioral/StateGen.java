@@ -1,16 +1,12 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StateGen {
+public class StateGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(StateGen.class);
 	private static final String HANDLE = "Handle";
 	private static final String INVOKED = "Invoked";
 	private static final String REQUEST = "request";
@@ -28,12 +24,6 @@ public class StateGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource state = DpInterfaceSource.newBuilder(packageName, stateName)
 				.addMethod(DpSourceMethod.newBuilder()
@@ -61,7 +51,7 @@ public class StateGen {
 						.build())
 				.collect(Collectors.toList());
 
-		dpSources.addAll(concreteStates, this.getClass());
+		dpSources.add(concreteStates, this.getClass());
 
 		DpClassSource context = DpClassSource.newBuilder(packageName, contextName)
 				.addField(DpSourceField.newBuilder(stateName.toLowerCase(), stateName)

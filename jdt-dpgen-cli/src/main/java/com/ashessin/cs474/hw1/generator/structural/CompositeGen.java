@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class CompositeGen {
+public class CompositeGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(CompositeGen.class);
 	private static final String OPERATION = "operation";
 	private static final String CHILDREN = "children";
 	private static final String CHILD = "Child";
@@ -29,12 +25,6 @@ public class CompositeGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpClassSource component = DpClassSource.newBuilder(packageName, componentName)
 				.setModifier(DpClassSource.Modifier.ABSTRACT)

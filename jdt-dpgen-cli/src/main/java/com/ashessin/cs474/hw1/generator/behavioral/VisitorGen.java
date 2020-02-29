@@ -1,18 +1,14 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
-public class VisitorGen {
+public class VisitorGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(VisitorGen.class);
 	private static final String ABSTRACT = "Abstract";
 	private static final String CONCRETE = "Concrete";
 	private static final String COUNTER = "counter";
@@ -35,12 +31,6 @@ public class VisitorGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		List<DpSourceMethod> visitorMethods = concreteElementNames.stream()
 				.map(concreteElementName -> DpSourceMethod.newBuilder()
@@ -85,7 +75,7 @@ public class VisitorGen {
 						.build())
 				.collect(toList());
 
-		dpSources.addAll(concreteElements, this.getClass());
+		dpSources.add(concreteElements, this.getClass());
 
 		List<DpSourceMethod> concreteVisitorMethods = IntStream.range(0, concreteElementNames.size())
 				.mapToObj(i -> DpSourceMethod.newBuilder(visitorMethods.get(i))
@@ -101,7 +91,7 @@ public class VisitorGen {
 						.build())
 				.collect(toList());
 
-		dpSources.addAll(concreteVisitors, this.getClass());
+		dpSources.add(concreteVisitors, this.getClass());
 
 		return dpSources;
 	}

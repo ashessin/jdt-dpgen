@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "state", version = "jdt-dpgen 0.1",
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class StateQ implements Callable<DpArrayList<DpSource>> {
+public class StateQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(StateQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.state";
@@ -47,11 +48,11 @@ public class StateQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new StateGen(packageName, stateName, concreteStateNames, contextName).main();
+		return new StateGen(packageName, stateName, concreteStateNames, contextName).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String STATE_NAME = "State";
 		private static final String CONCRETE_STATE_NAMES = "State1,State2,State3";

@@ -1,14 +1,13 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ChainOfResponsibilityGen {
+public class ChainOfResponsibilityGen extends DesignPatternGen {
 
 	private static final Logger log = LoggerFactory.getLogger(ChainOfResponsibilityGen.class);
 	private static final String HANDLE_REQUEST = "handleRequest";
@@ -27,13 +26,6 @@ public class ChainOfResponsibilityGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
-
 		DpClassSource handler = DpClassSource.newBuilder(packageName, handlerName)
 				.setModifier(DpClassSource.Modifier.ABSTRACT)
 				.addField(DpSourceField.newBuilder(handlerFieldName, handlerName)
@@ -74,7 +66,7 @@ public class ChainOfResponsibilityGen {
 								.build())
 						.build()).collect(Collectors.toList());
 
-		dpSources.addAll(concreteHandlers, this.getClass());
+		dpSources.add(concreteHandlers, this.getClass());
 
 		return dpSources;
 	}

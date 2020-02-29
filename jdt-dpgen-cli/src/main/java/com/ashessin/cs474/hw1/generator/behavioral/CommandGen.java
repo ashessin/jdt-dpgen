@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class CommandGen {
+public class CommandGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(CommandGen.class);
 	private static final String OPERATION = "operation";
 	private static final String PERFORMED = "Performed";
 	private static final String EXECUTE = "execute";
@@ -30,12 +26,6 @@ public class CommandGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource command = DpInterfaceSource.newBuilder(packageName, commandName)
 				.addMethod(DpSourceMethod.newBuilder()

@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "strategy", version = "jdt-dpgen 0.1",
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class StrategyQ implements Callable<DpArrayList<DpSource>> {
+public class StrategyQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(StrategyQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.strategy";
@@ -47,11 +48,11 @@ public class StrategyQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new StrategyGen(packageName, strategyName, concreteStrategyNames, contextName).main();
+		return new StrategyGen(packageName, strategyName, concreteStrategyNames, contextName).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String STRATEGY_NAME = "Strategy";
 		private static final String CONCRETE_STRATEGY_NAMES = "Strategy1,Strategy2,Strategy3";

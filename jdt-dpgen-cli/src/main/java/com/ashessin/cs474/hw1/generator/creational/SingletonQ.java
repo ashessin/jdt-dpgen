@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "singleton", version = "jdt-dpgen 0.1",
 		description = "Generates Singleton creational design pattern. " +
@@ -15,16 +15,13 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class SingletonQ implements Callable<DpArrayList<DpSource>> {
+public class SingletonQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(SingletonQ.class);
 	private static final String PACKAGE_NAME = "com.gof.creational.singleton";
 
-	@CommandLine.Spec
-	CommandLine.Model.CommandSpec spec;
-
 	@CommandLine.ArgGroup(exclusive = false)
-	InputGroup inputGroup;
+	InputGroup inputParameterGroup;
 
 	@CommandLine.Option(order = Integer.MIN_VALUE, required = true, arity = "1", names = {"-p", "--packageName"},
 			defaultValue = PACKAGE_NAME)
@@ -45,10 +42,10 @@ public class SingletonQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new SingletonGen(packageName, singletonName, singletonInstanceName, singletonAccessorName).main();
+		return new SingletonGen(packageName, singletonName, singletonInstanceName, singletonAccessorName).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String SINGLETON_NAME = "Singleton";
 		private static final String SINGLETON_INSTANCE_NAME = "instance";

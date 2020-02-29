@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -10,7 +12,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "templatemethod", version = "jdt-dpgen 0.1",
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class TemplateMethodQ implements Callable<DpArrayList<DpSource>> {
+public class TemplateMethodQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(TemplateMethodQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.templatemethod";
@@ -56,11 +57,11 @@ public class TemplateMethodQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new TemplateMethodGen(packageName, abstractClassName, concreteClassNames, primitiveMethods).main();
+		return new TemplateMethodGen(packageName, abstractClassName, concreteClassNames, primitiveMethods).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String ABSTRACT_CLASS_NAME = "AbstractClass";
 		private static final String CONCRETE_CLASS_NAME = "Class1,Class2";

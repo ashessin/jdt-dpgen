@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "decorator", version = "jdt-dpgen 0.1",
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class DecoratorQ implements Callable<DpArrayList<DpSource>> {
+public class DecoratorQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(DecoratorQ.class);
 	private static final String PACKAGE_NAME = "com.gof.structural.decorator";
@@ -48,11 +49,11 @@ public class DecoratorQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new DecoratorGen(packageName, decoratorName, concreteDecoratorNames, componentName, concreteComponentName).main();
+		return new DecoratorGen(packageName, decoratorName, concreteDecoratorNames, componentName, concreteComponentName).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String DECORATOR_NAME = "Decorator";
 		private static final String CONCRETE_DECORATOR_NAMES = "DecoratorA,DecoratorB";

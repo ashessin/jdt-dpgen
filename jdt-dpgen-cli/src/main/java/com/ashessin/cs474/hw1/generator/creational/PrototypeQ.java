@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -9,7 +11,6 @@ import picocli.CommandLine;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "prototype", version = "jdt-dpgen 0.1",
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class PrototypeQ implements Callable<DpArrayList<DpSource>> {
+public class PrototypeQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(PrototypeQ.class);
 	private static final String PACKAGE_NAME = "com.gof.creational.prototype";
@@ -55,11 +56,11 @@ public class PrototypeQ implements Callable<DpArrayList<DpSource>> {
 		});
 
 		log.info("Generating representation for design pattern sources.");
-		return new PrototypeGen(packageName, abstractPrototypeName, concretePrototypeName, propertiesMap).main();
+		return new PrototypeGen(packageName, abstractPrototypeName, concretePrototypeName, propertiesMap).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String ABSTRACT_PROTOTYPE_NAME = "Prototype";
 		private static final String CONCRETE_PROTOTYPE_NAME = "ConcretePrototype";

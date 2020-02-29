@@ -1,17 +1,13 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class ObserverGen {
+public class ObserverGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(ObserverGen.class);
 	private static final String UPDATE = "update";
 	private static final String STATE = "State";
 	private static final String TYPE = "int";
@@ -34,12 +30,6 @@ public class ObserverGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource observer = DpInterfaceSource.newBuilder(packageName, observerName)
 				.addMethod(DpSourceMethod.newBuilder()
@@ -68,7 +58,7 @@ public class ObserverGen {
 						.build())
 				.collect(toList());
 
-		dpSources.addAll(concreteObservers, this.getClass());
+		dpSources.add(concreteObservers, this.getClass());
 
 		DpClassSource subject = DpClassSource.newBuilder(packageName, subjectName)
 				.setModifier(DpClassSource.Modifier.ABSTRACT)

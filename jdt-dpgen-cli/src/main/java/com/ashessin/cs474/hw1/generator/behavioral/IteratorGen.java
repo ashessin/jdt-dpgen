@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class IteratorGen {
+public class IteratorGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(IteratorGen.class);
 	private static final String FIRST = "first";
 	private static final String NEXT = "next";
 	private static final String DONE = "Done";
@@ -34,12 +30,6 @@ public class IteratorGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource iterator = DpInterfaceSource.newBuilder(packageName, iteratorName)
 				.addMethod(DpSourceMethod.newBuilder()

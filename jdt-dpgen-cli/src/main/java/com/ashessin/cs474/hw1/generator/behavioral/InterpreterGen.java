@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class InterpreterGen {
+public class InterpreterGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(InterpreterGen.class);
 	private static final String INTERPRET = "interpret";
 	private static final String FIRST = "first";
 	private static final String SECOND = "second";
@@ -35,12 +31,6 @@ public class InterpreterGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpClassSource abstractExpression = DpClassSource.newBuilder(packageName, abstractExpressionName)
 				.setModifier(DpClassSource.Modifier.ABSTRACT)

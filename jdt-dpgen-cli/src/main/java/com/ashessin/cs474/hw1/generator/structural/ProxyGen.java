@@ -1,15 +1,11 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static java.util.stream.Collectors.toList;
 
-public class ProxyGen {
+public class ProxyGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(ProxyGen.class);
 	private static final String OPERATION_NAME = "doOperation";
 	private String packageName;
 	private String proxyName;
@@ -25,12 +21,6 @@ public class ProxyGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource subject = DpInterfaceSource.newBuilder(packageName, subjectName)
 				.addMethod(DpSourceMethod.newBuilder()

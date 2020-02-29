@@ -1,15 +1,11 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class DecoratorGen {
+public class DecoratorGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(DecoratorGen.class);
 	private static final String OPERATION = "operation";
 	private static final String SPECIAL = "Special";
 	private String packageName;
@@ -29,12 +25,6 @@ public class DecoratorGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource component = DpInterfaceSource.newBuilder(packageName, componentName)
 				.addMethod(DpSourceMethod.newBuilder()

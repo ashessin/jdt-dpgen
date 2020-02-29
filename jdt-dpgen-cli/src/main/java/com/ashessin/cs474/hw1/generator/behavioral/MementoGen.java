@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class MementoGen {
+public class MementoGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(MementoGen.class);
 	private static final String STATE = "State";
 	private static final String TYPE = "Object";
 	private static final String CREATE = "create";
@@ -25,12 +21,6 @@ public class MementoGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpSourceField stateField = DpSourceField.newBuilder(STATE.toLowerCase(), TYPE)
 				.setAccessModifier(DpSourceField.AccessModifier.PRIVATE)

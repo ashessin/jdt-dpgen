@@ -1,17 +1,13 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class BridgeGen {
+public class BridgeGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(BridgeGen.class);
 	private static final String CONCRETE = "Concrete";
 	private static final String OPERATION = "operation";
 	private static final String IMPLEMENTATION = "implementation";
@@ -32,12 +28,6 @@ public class BridgeGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpClassSource abstraction = DpClassSource.newBuilder(packageName, abstractionName)
 				.setModifier(DpClassSource.Modifier.ABSTRACT)

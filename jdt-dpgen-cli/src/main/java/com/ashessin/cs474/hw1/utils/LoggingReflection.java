@@ -9,12 +9,14 @@ import java.lang.reflect.Modifier;
 /**
  * Acts as proxy for logging fields in the source class using reflection.
  */
-public class LoggingReflection {
+public final class LoggingReflection {
+
+	private static final Logger log = LoggerFactory.getLogger(LoggingReflection.class);
 
 	private LoggingReflection() {
 	}
 
-	public static void infoLogInstance(Object instance) {
+	public static void debugLogInstance(Object instance) {
 
 		try {
 			Class<?> caller = Class.forName(instance.getClass().getName());
@@ -24,12 +26,12 @@ public class LoggingReflection {
 			for (Field field : declaredFields) {
 				if (!Modifier.isStatic(field.getModifiers())) {
 					field.setAccessible(Boolean.TRUE);
-					log.info("{}={}", field.getName(), field.get(instance));
+					log.debug("{}={}", field.getName(), field.get(instance));
 				}
 			}
 
 		} catch (ClassNotFoundException | IllegalAccessException e) {
-			e.printStackTrace();
+			log.error("Exception while logging instance fields: {}", e.getMessage());
 		}
 	}
 

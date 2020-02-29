@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "command", version = "jdt-dpgen 0.1",
 		description = "Generates Command behavioral design pattern. " +
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class CommandQ implements Callable<DpArrayList<DpSource>> {
+public class CommandQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(CommandQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.command";
@@ -45,10 +45,10 @@ public class CommandQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new CommandGen(packageName, commandName, concreteCommandNames,
-				receiverNames, abstractInvokerName).main();
+				receiverNames, abstractInvokerName).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String COMMAND_NAME = "Command";
 		private static final String CONCRETE_COMMAND_NAME = "Concrete" + COMMAND_NAME;

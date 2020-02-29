@@ -1,14 +1,9 @@
 package com.ashessin.cs474.hw1.generator;
 
-import ch.qos.logback.classic.Logger;
-import com.ashessin.cs474.hw1.parser.DpSourceParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.slf4j.LoggerFactory;
 
 public class DpClassSourceTest {
-
-	private static final Logger log = (Logger) LoggerFactory.getLogger(DpSourceParser.class);
 
 	/**
 	 * Test non abstract class with abstract methods.

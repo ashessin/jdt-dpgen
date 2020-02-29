@@ -1,20 +1,13 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
-import com.ashessin.cs474.hw1.generator.DpArrayList;
-import com.ashessin.cs474.hw1.generator.DpClassSource;
-import com.ashessin.cs474.hw1.generator.DpSource;
-import com.ashessin.cs474.hw1.generator.DpSourceMethod;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.ashessin.cs474.hw1.generator.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TemplateMethodGen {
+public class TemplateMethodGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(TemplateMethodGen.class);
 	private static final String TEMPLATE_METHOD = "templateMethod";
 	private String packageName;
 	private String abstractClassName;
@@ -31,12 +24,6 @@ public class TemplateMethodGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		String templateMethodyBody = "";
 		primitiveMethods.forEach((key, value) -> templateMethodyBody.concat(String.format("%s();", key)));
@@ -64,7 +51,7 @@ public class TemplateMethodGen {
 						.build())
 				.collect(Collectors.toList());
 
-		dpSources.addAll(concreteClasses, this.getClass());
+		dpSources.add(concreteClasses, this.getClass());
 
 		return dpSources;
 	}

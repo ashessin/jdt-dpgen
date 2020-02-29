@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "mediator", version = "jdt-dpgen 0.1",
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class MediatorQ implements Callable<DpArrayList<DpSource>> {
+public class MediatorQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(MediatorQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.mediator";
@@ -50,10 +51,10 @@ public class MediatorQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new MediatorGen(packageName, mediatorName, concreteMediatorName,
-				colleagueName, concreteColleagueNames).main();
+				colleagueName, concreteColleagueNames).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String MEDIATOR_NAME = "Mediator";
 		private static final String CONCRETE_MEDIATOR_NAME = "ConcreteMediator";

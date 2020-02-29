@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 /**
  * Saves a source/test file (*.java) assuming a maven project structure.
  */
-public class FileAuthor {
+public final class FileAuthor {
 
 	private static final Logger log = LoggerFactory.getLogger(FileAuthor.class);
 
@@ -19,24 +19,24 @@ public class FileAuthor {
 	}
 
 	// saves a source file (in java) assuming a maven project structure
-	public static void saveMain(final byte[] javaSource, final String canonicalName, final Path srcDirectory) {
+	public static boolean saveMain(final byte[] javaSource, final String canonicalName, final Path srcDirectory) {
 		final Path javaFile = Paths.get(srcDirectory.toString(),
 				"/src/main/java/", canonicalName.replace(".", "/") + ".java"
 		);
 
-		save(javaSource, javaFile);
+		return save(javaSource, javaFile);
 	}
 
 	// saves a test file (in java) assuming a maven project structure
-	public static void saveTest(final byte[] javaSource, final String canonicalName, final Path srcDirectory) {
+	public static boolean saveTest(final byte[] javaSource, final String canonicalName, final Path srcDirectory) {
 		final Path javaFile = Paths.get(srcDirectory.toString(),
 				"/src/test/java/", canonicalName.replace(".", "/") + ".java"
 		);
 
-		save(javaSource, javaFile);
+		return save(javaSource, javaFile);
 	}
 
-	private static void save(final byte[] javaSource, final Path srcFile) {
+	private static boolean save(final byte[] javaSource, final Path srcFile) {
 		try {
 			Files.createDirectories(srcFile.getParent());
 
@@ -48,9 +48,11 @@ public class FileAuthor {
 
 			Files.write(srcFile, javaSource);
 			log.info("Wrote {} bytes to file.", javaSource.length);
+			return true;
 
 		} catch (IOException e) {
 			log.error("Failed to write .java file.", e.getCause());
 		}
+		return false;
 	}
 }

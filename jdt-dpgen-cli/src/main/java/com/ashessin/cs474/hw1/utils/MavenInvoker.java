@@ -18,7 +18,7 @@ import java.util.Collections;
  * Note that Maven must be pre-installed and environment variables {@code MAVEN_HOME}, {@code M2_HOME}
  * must point to the installation location.
  */
-public class MavenInvoker {
+public final class MavenInvoker {
 
 	private static final Logger log = LoggerFactory.getLogger(MavenInvoker.class);
 
@@ -32,9 +32,9 @@ public class MavenInvoker {
 	 * @param groupId          unique identifier of the organization or group
 	 * @param artifactId       unique base name of the primary artifact
 	 *
-	 * @return 0 on success; otherwise -1
+	 * @return true on success; otherwise false
 	 */
-	public static int newJavaProject(final Path mavenProjectRoot, final String groupId, final String artifactId) {
+	public static boolean newJavaProject(final Path mavenProjectRoot, final String groupId, final String artifactId) {
 		String command = String.format("-q archetype:generate \\\n" +
 									   "    -DgroupId=%s \\\n" +
 									   "    -DartifactId=%s \\\n" +
@@ -52,9 +52,9 @@ public class MavenInvoker {
 	 * @param groupId          unique identifier of the organization or group
 	 * @param artifactId       unique base name of the primary artifact
 	 *
-	 * @return 0 on success; otherwise -1
+	 * @return true on success; otherwise false
 	 */
-	public static int newScalaProject(final Path mavenProjectRoot, final String groupId, final String artifactId) {
+	public static boolean newScalaProject(final Path mavenProjectRoot, final String groupId, final String artifactId) {
 		String command = String.format("-q archetype:generate -B \\\n" +
 									   "    -DarchetypeGroupId=net.alchim31.maven \\\n" +
 									   "    -DarchetypeArtifactId=scala-archetype-simple \\\n" +
@@ -72,11 +72,11 @@ public class MavenInvoker {
 	 * @param mavenProjectRoot parent directory path to an existing maven project directory
 	 * @param artifactId       unique base name of the primary artifact
 	 *
-	 * @return 0 on success; otherwise -1
+	 * @return true on success; otherwise false
 	 *
 	 * @throws IOException might fail to write the *.pom.xml file
 	 */
-	public static int scalagen(final Path mavenProjectRoot, final String artifactId) throws IOException {
+	public static boolean scalagen(final Path mavenProjectRoot, final String artifactId) throws IOException {
 		final Path path = Paths.get(mavenProjectRoot.toString(), artifactId, "pom.xml");
 
 		final String snippet = "<plugin>\n" +
@@ -98,15 +98,15 @@ public class MavenInvoker {
 	 * @param mavenProjectRoot parent directory path to an existing maven project directory
 	 * @param artifactId       unique base name of the primary artifact
 	 *
-	 * @return 0 on success; otherwise -1
+	 * @return true on success; otherwise false
 	 */
-	public static int complile(final Path mavenProjectRoot, final String artifactId) {
+	public static boolean complile(final Path mavenProjectRoot, final String artifactId) {
 		final Path path = Paths.get(mavenProjectRoot.toString(), artifactId, "pom.xml");
 		final String command = "compile";
 		return run(command, path.getParent());
 	}
 
-	private static int run(final String command, final Path mavenProjectRoot) {
+	private static boolean run(final String command, final Path mavenProjectRoot) {
 		final InvocationRequest request = new DefaultInvocationRequest();
 		request.setBatchMode(true);
 		request.setPomFile(new File(mavenProjectRoot + "/pom.xml"));
@@ -116,13 +116,13 @@ public class MavenInvoker {
 		try {
 			log.info("Invoking mvn command: mvn {}", command);
 			invoker.execute(request);
-			return 0;
+			return true;
 		} catch (MavenInvocationException | IllegalStateException e) {
 			log.error("Exception while executing mvn command: {}", e.getMessage());
 			log.info("Above exception usually occurs when the location of maven command can't be determined. " +
 					 "Please make sure `MAVEN_HOME` and `M2_HOME` environment variables " +
 					 "are set and point to maven installation directory");
 		}
-		return -1;
+		return false;
 	}
 }

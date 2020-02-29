@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "flyweight", version = "jdt-dpgen 0.1",
 		description = "Generates Flyweight structural design pattern. " +
@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class FlyweightQ implements Callable<DpArrayList<DpSource>> {
+public class FlyweightQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(FlyweightQ.class);
 	private static final String PACKAGE_NAME = "com.gof.structural.flyweight";
@@ -44,10 +44,10 @@ public class FlyweightQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new FlyweightGen(packageName, flyweightName, concreteFlyweightName, unsharedFlyweightName,
-				flyweightFactoryName).main();
+				flyweightFactoryName).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String FLYWEIGHT_NAME = "Flyweight";
 		private static final String FLYWEIGHT_FACTORY_NAME = FLYWEIGHT_NAME + "Factory";

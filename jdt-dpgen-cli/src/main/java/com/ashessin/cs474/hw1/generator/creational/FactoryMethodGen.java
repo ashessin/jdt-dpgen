@@ -1,17 +1,13 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class FactoryMethodGen {
+public class FactoryMethodGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(FactoryMethodGen.class);
 	private static final String CONCRETE = "Concrete";
 	private static final String FACTORY = "factory";
 	private static final String METHOD = "Method";
@@ -32,12 +28,6 @@ public class FactoryMethodGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource product = DpInterfaceSource.newBuilder(packageName, abstractProductName)
 				.build();
@@ -69,7 +59,7 @@ public class FactoryMethodGen {
 				.collect(Collectors.toList());
 
 
-		dpSources.addAll(concreteProducts, this.getClass());
+		dpSources.add(concreteProducts, this.getClass());
 
 		List<DpClassSource> concreteCreators = IntStream.range(0, concreteCreatorNames.size())
 				.mapToObj(i -> DpClassSource.newBuilder(packageName, concreteCreatorNames.get(i))
@@ -82,7 +72,7 @@ public class FactoryMethodGen {
 				.collect(Collectors.toList());
 
 
-		dpSources.addAll(concreteCreators, this.getClass());
+		dpSources.add(concreteCreators, this.getClass());
 
 		return dpSources;
 	}

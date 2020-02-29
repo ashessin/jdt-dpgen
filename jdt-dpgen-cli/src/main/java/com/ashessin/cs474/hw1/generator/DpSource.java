@@ -10,6 +10,14 @@ package com.ashessin.cs474.hw1.generator;
 public interface DpSource {
 
 	/**
+	 * @return canonical name for the top level named <i>design pattern</i>
+	 * reference type
+	 */
+	default String getCanonicalName() {
+		return getPackageName() + "." + getName();
+	}
+
+	/**
 	 * @return fully qualified named package/subpackage name that the top level
 	 * named <i>design pattern</i> reference type belongs to
 	 */

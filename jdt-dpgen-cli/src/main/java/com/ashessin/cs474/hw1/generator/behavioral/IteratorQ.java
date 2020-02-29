@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "iterator", version = "jdt-dpgen 0.1",
 		description = "Generates Iterator behavioral design pattern. " +
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class IteratorQ implements Callable<DpArrayList<DpSource>> {
+public class IteratorQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(IteratorQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.iterator";
@@ -44,11 +44,11 @@ public class IteratorQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new IteratorGen(packageName, aggregateName, concreteAggregateName, iteratorName, concreteIteratorName).main();
+		return new IteratorGen(packageName, aggregateName, concreteAggregateName, iteratorName, concreteIteratorName).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String AGGREGATE_NAME = "Aggregate";
 		private static final String CONCRETE_AGGREGATE_NAME = "Concrete" + AGGREGATE_NAME;

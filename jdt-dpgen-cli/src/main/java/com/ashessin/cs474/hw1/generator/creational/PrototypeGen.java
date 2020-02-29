@@ -1,7 +1,6 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class PrototypeGen {
+public class PrototypeGen extends DesignPatternGen {
 
 	private static final Logger log = LoggerFactory.getLogger(PrototypeGen.class);
 	private static final String ABSTRACT = "Abstract";
@@ -32,12 +31,6 @@ public class PrototypeGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpSourceMethod abstractCopyMethod = DpSourceMethod.newBuilder().setName(COPY).setReturnType(this.abstractPrototypeName).build();
 		DpInterfaceSource abstractProptotype = DpInterfaceSource.newBuilder(this.packageName, this.abstractPrototypeName)

@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "visitor", version = "jdt-dpgen 0.1",
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class VisitorQ implements Callable<DpArrayList<DpSource>> {
+public class VisitorQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(VisitorQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.visitor";
@@ -51,10 +52,10 @@ public class VisitorQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new VisitorGen(packageName, visitorName, concreteVisitorNames,
-				elementName, concreteElementNames).main();
+				elementName, concreteElementNames).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String VISITOR_NAME = "Visitor";
 		private static final String CONCRETE_VISITOR_NAMES = "Visitor1,Visitor2";

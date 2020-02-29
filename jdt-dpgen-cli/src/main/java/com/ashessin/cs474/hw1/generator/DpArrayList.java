@@ -17,22 +17,24 @@ public class DpArrayList<T extends DpSource> extends ArrayList<T> {
 		return super.add(t);
 	}
 
-	public boolean add(T t, Class<?> sourceClass) {
+	public boolean add(T t, Class<? extends DesignPatternGen> sourceClass) {
 		if (log.isDebugEnabled()) {
 			LoggingReflection.debugLogProxy(t, sourceClass);
 		}
 		return add(t);
 	}
 
-	public <A extends DpSource> void addAll(List<A> tList, Class<?> sourceClass) {
-		tList.forEach(t -> add((T) t, sourceClass));
+	public <A extends T> boolean add(List<A> tList, Class<? extends DesignPatternGen> sourceClass) {
+		tList.forEach(t -> add(t, sourceClass));
+		return true;
 	}
 
 	// TODO: Eliminate single usage
-	public <A extends DpSource, B extends DpSource> void addAll(Map<A, List<B>> tMap, Class<?> sourceClass) {
+	public <A extends T, B extends T> boolean add(Map<A, List<B>> tMap, Class<? extends DesignPatternGen> sourceClass) {
 		tMap.forEach((key, value) -> {
-			add((T) key, sourceClass);
-			value.forEach(b -> add((T) b, sourceClass));
+			add(key, sourceClass);
+			value.forEach(b -> add(b, sourceClass));
 		});
+		return true;
 	}
 }

@@ -1,16 +1,12 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StrategyGen {
+public class StrategyGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(StrategyGen.class);
 	private static final String ALGORITHM = "algorithm";
 	private static final String OPERATION = "operation";
 	private static final String CONCRETE = "Concrete";
@@ -32,13 +28,6 @@ public class StrategyGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
-
 		DpInterfaceSource strategy = DpInterfaceSource.newBuilder(packageName, strategyName)
 				.addMethod(DpSourceMethod.newBuilder()
 						.setName(ALGORITHM)
@@ -58,7 +47,7 @@ public class StrategyGen {
 						.build())
 				.collect(Collectors.toList());
 
-		dpSources.addAll(concreteStrategies, this.getClass());
+		dpSources.add(concreteStrategies, this.getClass());
 
 		DpClassSource context = DpClassSource.newBuilder(packageName, contextName)
 				.addField(DpSourceField.newBuilder(strategyName.toLowerCase(), strategyName)

@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "composite", version = "jdt-dpgen 0.1",
 		description = "Generates Composite structural design pattern. " +
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class CompositeQ implements Callable<DpArrayList<DpSource>> {
+public class CompositeQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(CompositeQ.class);
 	private static final String PACKAGE_NAME = "com.gof.structural.composite";
@@ -43,11 +43,11 @@ public class CompositeQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new CompositeGen(packageName, componentName, compositeName, leafName).main();
+		return new CompositeGen(packageName, componentName, compositeName, leafName).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String COMPONENT_NAME = "Component";
 		private static final String COMPOSITE_NAME = "Composite";

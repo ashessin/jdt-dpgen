@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "proxy", version = "jdt-dpgen 0.1",
 		description = "Generates Proxy structural design pattern. " +
@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class ProxyQ implements Callable<DpArrayList<DpSource>> {
+public class ProxyQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(ProxyQ.class);
 	private static final String PACKAGE_NAME = "com.gof.structural.proxy";
@@ -42,11 +42,11 @@ public class ProxyQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new ProxyGen(packageName, proxyName, subjectName, realSubjectName).main();
+		return new ProxyGen(packageName, proxyName, subjectName, realSubjectName).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String PROXY_NAME = "Proxy";
 		private static final String SUBJECT_NAME = "Subject";

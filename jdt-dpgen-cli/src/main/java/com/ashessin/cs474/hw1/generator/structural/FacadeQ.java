@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "facade", version = "jdt-dpgen 0.1",
 		description = "Generates Facade structural design pattern. " +
@@ -18,7 +19,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class FacadeQ implements Callable<DpArrayList<DpSource>> {
+public class FacadeQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(FacadeQ.class);
 	private static final String PACKAGE_NAME = "com.gof.structural.facaed";
@@ -45,10 +46,10 @@ public class FacadeQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new FacadeGen(packageName, facadeServiceName, serviceName, concreteServiceNames).main();
+		return new FacadeGen(packageName, facadeServiceName, serviceName, concreteServiceNames).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String FACADE_SERVICE_NAME = "FacadeService";
 		private static final String SERVICE_NAME = "Service";

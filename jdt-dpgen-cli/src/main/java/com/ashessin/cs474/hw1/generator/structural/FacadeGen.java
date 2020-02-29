@@ -1,16 +1,12 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FacadeGen {
+public class FacadeGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(FacadeGen.class);
 	private static final String ACTION = "Action";
 	private static final String PERFORMED = "Performed";
 	private static final String PERFORM = "Perform";
@@ -28,12 +24,6 @@ public class FacadeGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpClassSource service = DpClassSource.newBuilder(packageName, serviceName)
 				.setModifier(DpClassSource.Modifier.ABSTRACT)
@@ -59,7 +49,7 @@ public class FacadeGen {
 						.build())
 				.collect(Collectors.toList());
 
-		dpSources.addAll(concreteServices, this.getClass());
+		dpSources.add(concreteServices, this.getClass());
 
 		String facedServiceConstructorBody = "";
 		for (String concreteServiceName : concreteServiceNames) {

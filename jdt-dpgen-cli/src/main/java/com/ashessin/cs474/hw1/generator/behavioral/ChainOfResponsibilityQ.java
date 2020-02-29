@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "chainofresponsibility", version = "jdt-dpgen 0.1",
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class ChainOfResponsibilityQ implements Callable<DpArrayList<DpSource>> {
+public class ChainOfResponsibilityQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(ChainOfResponsibilityQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.chainofresponsibility";
@@ -48,11 +49,11 @@ public class ChainOfResponsibilityQ implements Callable<DpArrayList<DpSource>> {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new ChainOfResponsibilityGen(packageName, handlerName, handlerFieldName, concreteHandlers).main();
+		return new ChainOfResponsibilityGen(packageName, handlerName, handlerFieldName, concreteHandlers).method();
 
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String HANDLER_NAME = "Handler";
 		private static final String HANDLER_FIELD_NAME = "succesor";

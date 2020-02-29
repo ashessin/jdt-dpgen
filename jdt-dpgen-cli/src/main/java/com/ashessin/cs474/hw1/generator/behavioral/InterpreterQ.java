@@ -1,12 +1,12 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import picocli.CommandLine;
-
-import java.util.concurrent.Callable;
 
 @CommandLine.Command(name = "interpreter", version = "jdt-dpgen 0.1",
 		description = "Generates Interpreter behavioral design pattern. " +
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class InterpreterQ implements Callable<DpArrayList<DpSource>> {
+public class InterpreterQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(InterpreterQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.interpreter";
@@ -46,10 +46,10 @@ public class InterpreterQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new InterpreterGen(packageName, contextName, abstractExpressionName,
-				terminalExpressionName, orTerminalExpressionName, andTerminalExpressionName).main();
+				terminalExpressionName, orTerminalExpressionName, andTerminalExpressionName).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String CONTEXT_NAME = "Context";
 		private static final String ABSTRACT_EXPRESSION_NAME = "AbstractExpression";

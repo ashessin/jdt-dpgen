@@ -1,17 +1,13 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class BuilderGen {
+public class BuilderGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(BuilderGen.class);
 	private static final String BUILD = "build";
 	private String packageName;
 	private String abstractBuilderName;
@@ -32,12 +28,6 @@ public class BuilderGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		List<DpSourceField> concreteProductProperties = propertiesMap.entrySet().stream()
 				.map(entry -> DpSourceField.newBuilder(entry.getKey(), entry.getValue())

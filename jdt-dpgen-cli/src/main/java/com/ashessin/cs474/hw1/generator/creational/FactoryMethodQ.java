@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.creational;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "factorymethod", version = "jdt-dpgen 0.1",
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class FactoryMethodQ implements Callable<DpArrayList<DpSource>> {
+public class FactoryMethodQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(FactoryMethodQ.class);
 	private static final String PACKAGE_NAME = "com.gof.creational.factorymethod";
@@ -50,10 +51,10 @@ public class FactoryMethodQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new FactoryMethodGen(packageName, abstractCreatorName, concreteCreatorNames,
-				abstractProductName, concreteProductNames).main();
+				abstractProductName, concreteProductNames).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String ABSTRACT_CREATOR_NAME = "Creator";
 		private static final String CONCRETE_CREATOR_NAMES = "Creator1,Creator2";

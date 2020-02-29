@@ -1,13 +1,9 @@
 package com.ashessin.cs474.hw1.generator.structural;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-public class AdapterGen {
+public class AdapterGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(AdapterGen.class);
 	private static final String REQUEST = "Request";
 	private static final String SPECIAL = "special";
 	private static final String TYPE = "Object";
@@ -24,12 +20,6 @@ public class AdapterGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource target = DpInterfaceSource.newBuilder(packageName, targetName)
 				.addMethod(DpSourceMethod.newBuilder()

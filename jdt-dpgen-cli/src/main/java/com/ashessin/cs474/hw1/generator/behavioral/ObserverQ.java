@@ -1,5 +1,7 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
+import com.ashessin.cs474.hw1.generator.ArgGroup;
+import com.ashessin.cs474.hw1.generator.DesignPatternQ;
 import com.ashessin.cs474.hw1.generator.DpArrayList;
 import com.ashessin.cs474.hw1.generator.DpSource;
 import org.slf4j.Logger;
@@ -8,7 +10,6 @@ import picocli.CommandLine;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 @CommandLine.Command(name = "observer", version = "jdt-dpgen 0.1",
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 		showDefaultValues = true,
 		sortOptions = false
 )
-public class ObserverQ implements Callable<DpArrayList<DpSource>> {
+public class ObserverQ extends DesignPatternQ {
 
 	private static final Logger log = LoggerFactory.getLogger(ObserverQ.class);
 	private static final String PACKAGE_NAME = "com.gof.behavioral.observer";
@@ -49,10 +50,10 @@ public class ObserverQ implements Callable<DpArrayList<DpSource>> {
 
 		log.info("Generating representation for design pattern sources.");
 		return new ObserverGen(packageName, observerName, concreteObserverNames,
-				subjectName, concreteSubjectNames).main();
+				subjectName, concreteSubjectNames).method();
 	}
 
-	static class InputGroup {
+	static class InputGroup implements ArgGroup {
 
 		private static final String OBSERVER_NAME = "Observer";
 		private static final String CONCRETE_OBSERVER_NAMES = "Observer1,Observer2";

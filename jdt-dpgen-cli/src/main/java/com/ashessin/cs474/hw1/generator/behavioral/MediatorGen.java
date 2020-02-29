@@ -1,17 +1,13 @@
 package com.ashessin.cs474.hw1.generator.behavioral;
 
 import com.ashessin.cs474.hw1.generator.*;
-import com.ashessin.cs474.hw1.utils.LoggingReflection;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class MediatorGen {
+public class MediatorGen extends DesignPatternGen {
 
-	private static final Logger log = LoggerFactory.getLogger(MediatorGen.class);
 	private static final String NOTIFY = "notify";
 	private static final String RECEIVED = "Received";
 	private static final String RECEIVE = "Receive";
@@ -33,12 +29,6 @@ public class MediatorGen {
 	}
 
 	public DpArrayList<DpSource> main() {
-
-		DpArrayList<DpSource> dpSources = new DpArrayList<>();
-
-		if (log.isInfoEnabled()) {
-			LoggingReflection.infoLogInstance(this);
-		}
 
 		DpInterfaceSource mediator = DpInterfaceSource.newBuilder(packageName, mediatorName)
 				.addMethod(DpSourceMethod.newBuilder()
@@ -137,7 +127,7 @@ public class MediatorGen {
 						.build())
 				.collect(toList());
 
-		dpSources.addAll(concreteColleagues, this.getClass());
+		dpSources.add(concreteColleagues, this.getClass());
 
 		return dpSources;
 	}
