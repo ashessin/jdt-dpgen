@@ -12,11 +12,6 @@ public class DpArrayList<T extends DpSource> extends ArrayList<T> {
 
 	private static final Logger log = LoggerFactory.getLogger(DpArrayList.class);
 
-	@Override
-	public boolean add(T t) {
-		return super.add(t);
-	}
-
 	public boolean add(T t, Class<? extends DesignPatternGen> sourceClass) {
 		if (log.isDebugEnabled()) {
 			LoggingReflection.debugLogProxy(t, sourceClass);
@@ -30,7 +25,8 @@ public class DpArrayList<T extends DpSource> extends ArrayList<T> {
 	}
 
 	// TODO: Eliminate single usage
-	public <A extends T, B extends T> boolean add(Map<A, List<B>> tMap, Class<? extends DesignPatternGen> sourceClass) {
+	public <A extends T, B extends T> boolean add(Map<A, List<B>> tMap,
+												  Class<? extends DesignPatternGen> sourceClass) {
 		tMap.forEach((key, value) -> {
 			add(key, sourceClass);
 			value.forEach(b -> add(b, sourceClass));
