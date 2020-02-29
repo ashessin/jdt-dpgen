@@ -21,10 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 
 import static java.util.stream.Collectors.toList;
@@ -90,8 +87,22 @@ public class Main implements Callable<Integer> {
 	)
 	private Path configLocation;
 
-	// this example implements Callable, so parsing, error handling and handling user
-	// requests for usage help or version help can be done with one line of code.
+	// TODO: refactor this method
+	public static Map<String, Map<String, String>> getDesignPatterns() {
+		Map<String, Map<String, String>> dps = new HashMap<>(1);
+		new CommandLine(new Main()).getSubcommands().forEach((s, commandLine) -> {
+			DesignPatternQ dpQ = commandLine.getCommand();
+			Map<String, String> args = new LinkedHashMap<>(1);
+			commandLine.getCommandSpec().args().stream()
+					.filter(argSpec -> argSpec.toString().contains("InputGroup"))
+					.forEach(argSpec -> args.put(
+							argSpec.toString().split("InputGroup\\.")[1],
+							argSpec.defaultValue()));
+			dps.put(dpQ.getDesignPatternName(), args);
+		});
+		return dps;
+	}
+
 	public static void main(String... args) {
 		System.setProperty("picocli.usage.width", "auto");
 		Main main = new Main();
@@ -256,7 +267,7 @@ public class Main implements Callable<Integer> {
 					log.info("Successfully setup {} as maven project.", main.artifactId);
 				}
 				try {
-					if (main.outputLanguage.toString().equalsIgnoreCase("scala")) {
+					if (main.outputLanguage == OutputLanguage.SCALA) {
 						log.info("Beginning Java to Scala transformation.");
 						if (MavenInvoker.scalagen(main.outputLocation, main.artifactId)) {
 							log.info("Successfully converted {} source files to scala.", main.artifactId);
