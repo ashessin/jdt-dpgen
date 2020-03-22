@@ -904,4 +904,17 @@ are described here: [Development Instance Settings, Caches, Logs, and Plugins](h
 
 https://asing80.people.uic.edu/cs474/hw2
 
-```
+
+
+-------------
+8. References
+-------------
+
+  1. http://www.design-patterns-stories.com/
+  2. https://github.com/TomerFi/design-patterns-examples
+  3. https://sourcemaking.com/design_patterns
+  4. https://refactoring.guru/design-patterns
+  5. https://www.oodesign.com/
+  6. https://www.journaldev.com/1377/java-singleton-design-pattern-best-practices-examples
+  7. http://hrabosch.com/2017/07/16/intellij-platform-plugin-development-example-1-generate-class-from-template/
+  8. https://www.plugin-dev.com/intellij-notifications.pdf
