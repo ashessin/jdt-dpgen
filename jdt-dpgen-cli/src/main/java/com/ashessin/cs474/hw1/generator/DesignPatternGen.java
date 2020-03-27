@@ -10,7 +10,7 @@ public abstract class DesignPatternGen {
 	protected DpArrayList<DpSource> dpSources = new DpArrayList<>();
 
 	public final DpArrayList<DpSource> method() {
-		if (log.isInfoEnabled()) {
+		if (log.isDebugEnabled()) {
 			LoggingReflection.debugLogInstance(this);
 		}
 		return main();
