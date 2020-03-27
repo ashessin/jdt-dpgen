@@ -8,7 +8,7 @@ among others). An explanation for each pattern and the relationship among its re
 retrieved on-demand. The program itself makes use of some of these patterns (Builder, Factory Method, 
 Prototype, Observer, etc.), both directly and indirectly.
 
-
+![jdt-dpgen-intellij](jdt-dpgen-intellij/etc/jdt-dpgen-intellij.gif "JDT DpGen IntelliJ Plugin")
 
 -----
 INDEX
