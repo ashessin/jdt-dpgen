@@ -51,7 +51,7 @@ public class VisitorQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new VisitorGen(packageName, visitorName, concreteVisitorNames,
-				elementName, concreteElementNames).method();
+				elementName, concreteElementNames).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

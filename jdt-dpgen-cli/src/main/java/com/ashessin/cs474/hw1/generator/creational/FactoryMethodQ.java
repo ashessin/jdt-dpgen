@@ -51,7 +51,7 @@ public class FactoryMethodQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new FactoryMethodGen(packageName, abstractCreatorName, concreteCreatorNames,
-				abstractProductName, concreteProductNames).method();
+				abstractProductName, concreteProductNames).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

@@ -42,7 +42,7 @@ public class ProxyQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new ProxyGen(packageName, proxyName, subjectName, realSubjectName).method();
+		return new ProxyGen(packageName, proxyName, subjectName, realSubjectName).invoke();
 
 	}
 

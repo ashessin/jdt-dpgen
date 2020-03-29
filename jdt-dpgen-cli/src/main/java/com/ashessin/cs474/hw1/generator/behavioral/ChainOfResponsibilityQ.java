@@ -49,7 +49,7 @@ public class ChainOfResponsibilityQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new ChainOfResponsibilityGen(packageName, handlerName, handlerFieldName, concreteHandlers).method();
+		return new ChainOfResponsibilityGen(packageName, handlerName, handlerFieldName, concreteHandlers).invoke();
 
 	}
 

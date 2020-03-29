@@ -9,7 +9,7 @@ public abstract class DesignPatternGen {
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	protected DpArrayList<DpSource> dpSources = new DpArrayList<>();
 
-	public final DpArrayList<DpSource> method() {
+	public final DpArrayList<DpSource> invoke() {
 		if (log.isDebugEnabled()) {
 			LoggingReflection.debugLogInstance(this);
 		}

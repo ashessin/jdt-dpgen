@@ -49,7 +49,7 @@ public class BridgeQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new BridgeGen(packageName, abstractionName, refinedAbstractionName,
-				implementorName, concreteImplementorNames).method();
+				implementorName, concreteImplementorNames).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

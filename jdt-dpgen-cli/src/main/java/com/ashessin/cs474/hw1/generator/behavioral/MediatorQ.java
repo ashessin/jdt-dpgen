@@ -51,7 +51,7 @@ public class MediatorQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new MediatorGen(packageName, mediatorName, concreteMediatorName,
-				colleagueName, concreteColleagueNames).method();
+				colleagueName, concreteColleagueNames).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

@@ -48,7 +48,7 @@ public class StateQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new StateGen(packageName, stateName, concreteStateNames, contextName).method();
+		return new StateGen(packageName, stateName, concreteStateNames, contextName).invoke();
 
 	}
 

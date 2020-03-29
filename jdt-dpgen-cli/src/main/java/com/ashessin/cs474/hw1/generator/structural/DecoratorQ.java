@@ -50,7 +50,7 @@ public class DecoratorQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new DecoratorGen(packageName, decoratorName, concreteDecoratorNames, componentName,
-				concreteComponentName).method();
+				concreteComponentName).invoke();
 
 	}
 

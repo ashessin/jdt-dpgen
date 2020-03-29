@@ -45,7 +45,7 @@ public class CommandQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new CommandGen(packageName, commandName, concreteCommandNames,
-				receiverNames, abstractInvokerName).method();
+				receiverNames, abstractInvokerName).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

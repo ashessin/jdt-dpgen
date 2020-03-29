@@ -43,7 +43,7 @@ public class AdapterQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new AdapterGen(packageName, adapterName, adapteeName, targetName).method();
+		return new AdapterGen(packageName, adapterName, adapteeName, targetName).invoke();
 
 	}
 

@@ -48,7 +48,7 @@ public class StrategyQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new StrategyGen(packageName, strategyName, concreteStrategyNames, contextName).method();
+		return new StrategyGen(packageName, strategyName, concreteStrategyNames, contextName).invoke();
 
 	}
 

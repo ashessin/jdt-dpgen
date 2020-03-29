@@ -43,7 +43,7 @@ public class MementoQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new MementoGen(packageName, momentoName, caretakerName, originatorName).method();
+		return new MementoGen(packageName, momentoName, caretakerName, originatorName).invoke();
 
 	}
 

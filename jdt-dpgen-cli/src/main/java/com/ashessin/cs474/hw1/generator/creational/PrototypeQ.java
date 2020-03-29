@@ -56,7 +56,7 @@ public class PrototypeQ extends DesignPatternQ {
 		});
 
 		log.info("Generating representation for design pattern sources.");
-		return new PrototypeGen(packageName, abstractPrototypeName, concretePrototypeName, propertiesMap).method();
+		return new PrototypeGen(packageName, abstractPrototypeName, concretePrototypeName, propertiesMap).invoke();
 
 	}
 

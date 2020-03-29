@@ -44,7 +44,7 @@ public class IteratorQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new IteratorGen(packageName, aggregateName, concreteAggregateName, iteratorName, concreteIteratorName).method();
+		return new IteratorGen(packageName, aggregateName, concreteAggregateName, iteratorName, concreteIteratorName).invoke();
 
 	}
 

@@ -74,7 +74,7 @@ public class AbstractFactoryQ extends DesignPatternQ {
 		}
 
 		log.info("Generating representation for design pattern sources.");
-		return new AbstractFactoryGen(packageName, abstractFactoryName, concreteFactoryNames, products).method();
+		return new AbstractFactoryGen(packageName, abstractFactoryName, concreteFactoryNames, products).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

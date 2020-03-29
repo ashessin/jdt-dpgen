@@ -43,7 +43,7 @@ public class CompositeQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new CompositeGen(packageName, componentName, compositeName, leafName).method();
+		return new CompositeGen(packageName, componentName, compositeName, leafName).invoke();
 
 	}
 

@@ -58,7 +58,7 @@ public class BuilderQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new BuilderGen(packageName, abstractBuilderName, concreteBuilderName, concreteProductName,
-				propertiesMap).method();
+				propertiesMap).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

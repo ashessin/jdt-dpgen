@@ -46,7 +46,7 @@ public class FacadeQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new FacadeGen(packageName, facadeServiceName, serviceName, concreteServiceNames).method();
+		return new FacadeGen(packageName, facadeServiceName, serviceName, concreteServiceNames).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

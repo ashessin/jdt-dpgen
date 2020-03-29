@@ -57,7 +57,7 @@ public class TemplateMethodQ extends DesignPatternQ {
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new TemplateMethodGen(packageName, abstractClassName, concreteClassNames, primitiveMethods).method();
+		return new TemplateMethodGen(packageName, abstractClassName, concreteClassNames, primitiveMethods).invoke();
 
 	}
 

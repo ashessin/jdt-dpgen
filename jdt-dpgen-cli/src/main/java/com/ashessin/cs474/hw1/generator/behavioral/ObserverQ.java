@@ -50,7 +50,7 @@ public class ObserverQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new ObserverGen(packageName, observerName, concreteObserverNames,
-				subjectName, concreteSubjectNames).method();
+				subjectName, concreteSubjectNames).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

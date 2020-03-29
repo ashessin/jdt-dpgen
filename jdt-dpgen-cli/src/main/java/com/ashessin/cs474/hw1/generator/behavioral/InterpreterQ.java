@@ -46,7 +46,7 @@ public class InterpreterQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new InterpreterGen(packageName, contextName, abstractExpressionName,
-				terminalExpressionName, orTerminalExpressionName, andTerminalExpressionName).method();
+				terminalExpressionName, orTerminalExpressionName, andTerminalExpressionName).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {

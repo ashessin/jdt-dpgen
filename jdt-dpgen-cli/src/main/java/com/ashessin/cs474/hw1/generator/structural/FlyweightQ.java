@@ -44,7 +44,7 @@ public class FlyweightQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new FlyweightGen(packageName, flyweightName, concreteFlyweightName, unsharedFlyweightName,
-				flyweightFactoryName).method();
+				flyweightFactoryName).invoke();
 	}
 
 	static class InputGroup implements ArgGroup {
