@@ -6,13 +6,17 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.util.ui.JBUI;
+import org.apache.xmlbeans.impl.jam.JField;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.ashessin.cs474.hw1.Main.getDesignPatterns;
 
@@ -22,7 +26,7 @@ public class DpGenerateForm {
 	private static Map<String, Map<String, String>> designPatterns = getDesignPatterns();
 
 	private DpGenerate dpGenerate;
-	private String[] parameters;
+	private Map<JLabel, JTextField> parameters;
 	private JPanel mainPanel;
 	private JRadioButton selectDpRadioButton;
 	private JComboBox<String> selectDpComboBox;
@@ -83,6 +87,10 @@ public class DpGenerateForm {
 		});
 	}
 
+	public Map<JLabel, JTextField> getParameters() {
+		return parameters;
+	}
+
 	public static Map<String, Map<String, String>> retriveDesignPatterns() {
 		return designPatterns;
 	}
@@ -111,7 +119,10 @@ public class DpGenerateForm {
 		if (method == DpGenerationMethod.SELECT_DP) {
 			String[] command = (Objects.requireNonNull(selectDpComboBox.getSelectedItem()).toString()
 										.replace(" ", "")
-										.toLowerCase() + " " + String.join(" ", parameters)).split(" ");
+										.toLowerCase() + " " + parameters.values().stream()
+												.map(JTextComponent::getText)
+												.collect(Collectors.joining(" ")))
+				.split(" ");
 			dpGenerate.setCommand(command);
 		} else {
 			dpGenerate.setCommand(useCommandTextField.getText().split(" "));
@@ -145,42 +156,45 @@ public class DpGenerateForm {
 		// Update fields panel with new components
 		clearFieldsPanel();
 		fieldsPanel.setLayout(new GridLayoutManager(activeSelection.size(), 2, JBUI.emptyInsets(), -1, -1));
-		parameters = new String[activeSelection.size()];
+		parameters = new LinkedHashMap<>(activeSelection.size());
 		int row = 0;
 		for (Map.Entry<String, String> entry : activeSelection.entrySet()) {
 			String labelText = entry.getKey();
 			String fieldText = entry.getValue();
+
 			final JLabel label = new JLabel();
+			final JTextField textField = new JTextField();
+
+			label.setLabelFor(textField);
 			label.setText(labelText + ":");
 			fieldsPanel.add(label, new GridConstraints(row, 0, 1, 1, GridConstraints.ANCHOR_WEST,
 					GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED,
 					null, new Dimension(200, -1), null, 0, false));
-			JTextField textField = new JTextField();
 			textField.setText(fieldText);
+
 			int i = row;
-			parameters[i] = fieldText;
+			parameters.put(label, textField);
 			textField.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
 				public void insertUpdate(DocumentEvent documentEvent) {
-					parameters[i] = textField.getText();
 					parseTextFieldToCommand(DpGenerationMethod.SELECT_DP);
 				}
 
 				@Override
 				public void removeUpdate(DocumentEvent documentEvent) {
-					parameters[i] = textField.getText();
 					parseTextFieldToCommand(DpGenerationMethod.SELECT_DP);
 				}
 
 				@Override
 				public void changedUpdate(DocumentEvent documentEvent) {
-					parameters[i] = textField.getText();
 					parseTextFieldToCommand(DpGenerationMethod.SELECT_DP);
 				}
 			});
+
 			fieldsPanel.add(textField, new GridConstraints(row, 1, 1, 1, GridConstraints.ANCHOR_EAST,
 					GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW,
 					GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(250, -1), null, 0, false));
+
 			row++;
 		}
 
