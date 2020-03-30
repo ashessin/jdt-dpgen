@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class TemplateMethodGen extends DesignPatternGen {
 
 	private static final String TEMPLATE_METHOD = "templateMethod";
+
 	private String packageName;
 	private String abstractClassName;
 	private List<String> concreteClassNames;

@@ -9,11 +9,10 @@ import static java.util.stream.Collectors.toList;
 
 public class VisitorGen extends DesignPatternGen {
 
-	private static final String ABSTRACT = "Abstract";
-	private static final String CONCRETE = "Concrete";
 	private static final String COUNTER = "counter";
 	private static final String ACCEPT = "accept";
 	private static final String VISIT = "visit";
+
 	private String packageName;
 	private String visitorName;
 	private List<String> concreteVisitorNames;
@@ -34,8 +33,9 @@ public class VisitorGen extends DesignPatternGen {
 
 		List<DpSourceMethod> visitorMethods = concreteElementNames.stream()
 				.map(concreteElementName -> DpSourceMethod.newBuilder()
-						.setName(VISIT + CONCRETE + concreteElementName)
-						.addParameter(CONCRETE.toLowerCase() + concreteElementName, CONCRETE + concreteElementName)
+						.setName(VISIT + concreteElementName)
+						.addParameter(concreteElementName.substring(0, 1).toLowerCase() + concreteElementName.substring(1),
+								concreteElementName)
 						.build())
 				.collect(toList());
 		DpInterfaceSource visitor = DpInterfaceSource.newBuilder(packageName, visitorName)
@@ -55,7 +55,7 @@ public class VisitorGen extends DesignPatternGen {
 		dpSources.add(element, this.getClass());
 
 		List<DpClassSource> concreteElements = concreteElementNames.stream()
-				.map(concreteElementName -> DpClassSource.newBuilder(packageName, CONCRETE + concreteElementName)
+				.map(concreteElementName -> DpClassSource.newBuilder(packageName, concreteElementName)
 						.addImplementsInterface(elementName)
 						.addField(DpSourceField.newBuilder(COUNTER, "int").build())
 						.addMethod(DpSourceMethod.newBuilder()
@@ -70,7 +70,7 @@ public class VisitorGen extends DesignPatternGen {
 								.build())
 						.addMethod(DpSourceMethod.newBuilder(acceptMethod)
 								.setBody(String.format("%s.visit%s(this);",
-										visitorName.toLowerCase(), CONCRETE + concreteElementName))
+										visitorName.toLowerCase(), concreteElementName))
 								.build())
 						.build())
 				.collect(toList());
@@ -85,7 +85,7 @@ public class VisitorGen extends DesignPatternGen {
 						.build())
 				.collect(toList());
 		List<DpClassSource> concreteVisitors = concreteVisitorNames.stream()
-				.map(concreteVisitorName -> DpClassSource.newBuilder(packageName, CONCRETE + concreteVisitorName)
+				.map(concreteVisitorName -> DpClassSource.newBuilder(packageName, concreteVisitorName)
 						.addImplementsInterface(visitorName)
 						.addMethods(concreteVisitorMethods)
 						.build())

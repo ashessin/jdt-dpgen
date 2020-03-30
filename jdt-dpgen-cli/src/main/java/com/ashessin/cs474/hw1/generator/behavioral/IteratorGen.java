@@ -12,6 +12,7 @@ public class IteratorGen extends DesignPatternGen {
 	private static final String RECORDS = "Records";
 	private static final String INDEX = "index";
 	private static final String OBJECT = "Object";
+
 	private String packageName;
 	private String aggregateName;
 	private String concreteAggregateName;

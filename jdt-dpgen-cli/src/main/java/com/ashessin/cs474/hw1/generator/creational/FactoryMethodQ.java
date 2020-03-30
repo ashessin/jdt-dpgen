@@ -57,9 +57,9 @@ public class FactoryMethodQ extends DesignPatternQ {
 	static class InputGroup implements ArgGroup {
 
 		private static final String ABSTRACT_CREATOR_NAME = "Creator";
-		private static final String CONCRETE_CREATOR_NAMES = "Creator1,Creator2";
+		private static final String CONCRETE_CREATOR_NAMES = "ConcreteCreator1,ConcreteCreator2";
 		private static final String ABSTRACT_PRODUCT_NAME = "Product";
-		private static final String CONCRETE_PRODUCT_NAMES = "Product1,Product2";
+		private static final String CONCRETE_PRODUCT_NAMES = "ConcreteProduct1,ConcreteProduct2";
 
 		@CommandLine.Parameters(index = "0", paramLabel = "AbstractCreatorName",
 				description = "The Creator abstract class declares the factory method interface.",
@@ -70,12 +70,12 @@ public class FactoryMethodQ extends DesignPatternQ {
 				description = "The ConcreteCreator class implements the Creator's factory method and returns an " +
 							  "instance of the ConcreteProduct.",
 				defaultValue = CONCRETE_CREATOR_NAMES)
-		static String concreteCreatorNames;
+		static String concreteCreatorNames = CONCRETE_CREATOR_NAMES;
 
 		@CommandLine.Parameters(index = "2", paramLabel = "AbstractProductName",
 				description = "The Product interface defines the interface of objects the factory method creates.",
 				defaultValue = ABSTRACT_PRODUCT_NAME)
-		static String abstractProductName;
+		static String abstractProductName = ABSTRACT_PRODUCT_NAME;
 
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteProductNames",
 				description = "The ConcreteProduct class implements the Product interface.",

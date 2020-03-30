@@ -14,6 +14,7 @@ public class ObserverGen extends DesignPatternGen {
 	private static final String ATTACH = "attach";
 	private static final String DETACH = "detach";
 	private static final String NOTIFY = "notify";
+
 	private String packageName;
 	private String observerName;
 	private List<String> concreteObserverNames;

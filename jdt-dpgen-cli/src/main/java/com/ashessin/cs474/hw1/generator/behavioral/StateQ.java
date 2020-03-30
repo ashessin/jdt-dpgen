@@ -55,7 +55,7 @@ public class StateQ extends DesignPatternQ {
 	static class InputGroup implements ArgGroup {
 
 		private static final String STATE_NAME = "State";
-		private static final String CONCRETE_STATE_NAMES = "State1,State2,State3";
+		private static final String CONCRETE_STATE_NAMES = "ConcreteState1,ConcreteState2,ConcreteState3";
 		private static final String CONTEXT_NAME = "Context";
 
 

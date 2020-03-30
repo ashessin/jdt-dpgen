@@ -9,6 +9,7 @@ public class ChainOfResponsibilityGen extends DesignPatternGen {
 
 	private static final String HANDLE_REQUEST = "handleRequest";
 	private static final String INVOKED = "Invoked";
+
 	private String packageName;
 	private String handlerName;
 	private String handlerFieldName;

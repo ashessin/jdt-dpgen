@@ -8,6 +8,7 @@ public class CommandGen extends DesignPatternGen {
 	private static final String PERFORMED = "Performed";
 	private static final String EXECUTE = "execute";
 	private static final String ACTION = "action";
+
 	private String packageName;
 	private String commandName;
 	private String concreteCommandName;

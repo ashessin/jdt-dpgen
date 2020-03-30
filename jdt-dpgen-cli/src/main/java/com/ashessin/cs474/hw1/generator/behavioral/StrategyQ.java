@@ -55,7 +55,7 @@ public class StrategyQ extends DesignPatternQ {
 	static class InputGroup implements ArgGroup {
 
 		private static final String STRATEGY_NAME = "Strategy";
-		private static final String CONCRETE_STRATEGY_NAMES = "Strategy1,Strategy2,Strategy3";
+		private static final String CONCRETE_STRATEGY_NAMES = "ConcreteStrategy1,ConcreteStrategy2,ConcreteStrategy3";
 		private static final String CONTEXT_NAME = "Context";
 
 

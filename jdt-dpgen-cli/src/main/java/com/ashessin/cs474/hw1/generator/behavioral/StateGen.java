@@ -10,7 +10,7 @@ public class StateGen extends DesignPatternGen {
 	private static final String HANDLE = "Handle";
 	private static final String INVOKED = "Invoked";
 	private static final String REQUEST = "request";
-	private static final String CONCRETE = "Concrete";
+
 	private String packageName;
 	private String stateName;
 	private List<String> concreteStateNames;
@@ -34,7 +34,7 @@ public class StateGen extends DesignPatternGen {
 		dpSources.add(state, this.getClass());
 
 		List<DpClassSource> concreteStates = concreteStateNames.stream()
-				.map(concreteStateName -> DpClassSource.newBuilder(packageName, CONCRETE + concreteStateName)
+				.map(concreteStateName -> DpClassSource.newBuilder(packageName, concreteStateName)
 						.addImplementsInterface(stateName)
 						.addField(DpSourceField.newBuilder(HANDLE.toLowerCase() + INVOKED, "boolean")
 								.setAccessModifier(DpSourceField.AccessModifier.PRIVATE)

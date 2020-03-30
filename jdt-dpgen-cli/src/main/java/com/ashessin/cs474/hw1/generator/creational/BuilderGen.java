@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class BuilderGen extends DesignPatternGen {
 
 	private static final String BUILD = "build";
+
 	private String packageName;
 	private String abstractBuilderName;
 	private String concreteBuilderName;

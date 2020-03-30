@@ -79,10 +79,11 @@ public class AbstractFactoryQ extends DesignPatternQ {
 
 	static class InputGroup implements ArgGroup {
 
-		private static final String ABSTRACT_FACTORY_NAME = "Factory";
-		private static final String CONCRETE_FACTORY_NAMES = "Factory1,Factory2";
-		private static final String ABSTRACT_PRODUCT_NAMES = "ProductA,ProductB";
-		private static final String CONCRETE_PRODUCT_NAMES = "ProductA1,ProductA2;ProductB1,ProductB2";
+		private static final String ABSTRACT_FACTORY_NAME = "AbstractFactory";
+		private static final String CONCRETE_FACTORY_NAMES = "ConcreteFactory1,ConcreteFactory2";
+		private static final String ABSTRACT_PRODUCT_NAMES = "AbstractProductA,AbstractProductB";
+		private static final String CONCRETE_PRODUCT_NAMES = "ConcreteProductA1,ConcreteProductA2;" +
+															 "ConcreteProductB1,ConcreteProductB2";
 
 		@CommandLine.Parameters(index = "0", paramLabel = "AbstractFactoryName",
 				description = "The AbstractFactory defines the interface for creation of the abstract product " +

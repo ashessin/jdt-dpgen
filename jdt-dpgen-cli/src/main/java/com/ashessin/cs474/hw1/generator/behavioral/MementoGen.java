@@ -8,6 +8,7 @@ public class MementoGen extends DesignPatternGen {
 	private static final String TYPE = "Object";
 	private static final String CREATE = "create";
 	private static final String RESTORE = "restore";
+
 	private String packageName;
 	private String momentoName;
 	private String caretakerName;

@@ -9,7 +9,6 @@ public class StrategyGen extends DesignPatternGen {
 
 	private static final String ALGORITHM = "algorithm";
 	private static final String OPERATION = "operation";
-	private static final String CONCRETE = "Concrete";
 	private static final String TYPE = "Object";
 
 	private String packageName;
@@ -38,7 +37,7 @@ public class StrategyGen extends DesignPatternGen {
 		dpSources.add(strategy, this.getClass());
 
 		List<DpClassSource> concreteStrategies = concreteStrategyNames.stream()
-				.map(concreteStrategyName -> DpClassSource.newBuilder(packageName, CONCRETE + concreteStrategyName)
+				.map(concreteStrategyName -> DpClassSource.newBuilder(packageName, concreteStrategyName)
 						.addMethod(DpSourceMethod.newBuilder()
 								.setName(ALGORITHM)
 								.setReturnType(TYPE)

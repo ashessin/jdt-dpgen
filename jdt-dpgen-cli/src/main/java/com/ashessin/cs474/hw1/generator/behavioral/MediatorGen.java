@@ -13,6 +13,7 @@ public class MediatorGen extends DesignPatternGen {
 	private static final String RECEIVE = "Receive";
 	private static final String MESSAGE = "Message";
 	private static final String TYPE = "Object";
+
 	private String packageName;
 	private String mediatorName;
 	private String concreteMediatorName;

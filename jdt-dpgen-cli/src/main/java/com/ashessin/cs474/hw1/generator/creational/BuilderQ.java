@@ -75,9 +75,8 @@ public class BuilderQ extends DesignPatternQ {
 		static String abstractBuilderName = ABSTRACT_BUILDER_NAME;
 
 		@CommandLine.Parameters(index = "1", paramLabel = "ConcreteBuilderName",
-				description = "The ConcreteBuilder class constructs and assembles parts of the product, implementing" +
-							  " " +
-							  "the Builder interface.",
+				description = "The ConcreteBuilder class constructs and assembles parts of the product, " +
+							  "implementing the Builder interface.",
 				defaultValue = CONCRETE_BUILDER_NAME)
 		static String concreteBuilderName = CONCRETE_BUILDER_NAME;
 

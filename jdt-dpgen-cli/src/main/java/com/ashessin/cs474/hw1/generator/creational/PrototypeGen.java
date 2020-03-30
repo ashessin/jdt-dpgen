@@ -10,6 +10,7 @@ public class PrototypeGen extends DesignPatternGen {
 
 	private static final String ORIGINAL = "original";
 	private static final String COPY = "copy";
+
 	private String packageName;
 	private String abstractPrototypeName;
 	private String concretePrototypeName;

@@ -8,9 +8,9 @@ import java.util.stream.IntStream;
 
 public class FactoryMethodGen extends DesignPatternGen {
 
-	private static final String CONCRETE = "Concrete";
 	private static final String FACTORY = "factory";
 	private static final String METHOD = "Method";
+
 	private String packageName;
 	private String abstractCreatorName;
 	private List<String> concreteCreatorNames;
@@ -53,7 +53,7 @@ public class FactoryMethodGen extends DesignPatternGen {
 		dpSources.add(creator, this.getClass());
 
 		List<DpClassSource> concreteProducts = concreteProductNames.stream()
-				.map(concreteProductName -> DpClassSource.newBuilder(packageName, CONCRETE + concreteProductName)
+				.map(concreteProductName -> DpClassSource.newBuilder(packageName, concreteProductName)
 						.addImplementsInterface(abstractProductName)
 						.build())
 				.collect(Collectors.toList());
@@ -66,7 +66,7 @@ public class FactoryMethodGen extends DesignPatternGen {
 						.setExtendsClass(abstractCreatorName)
 						.addMethod(DpSourceMethod.newBuilder(creator.getMethods().get(0))
 								.setBody(String.format("return new %s();",
-										CONCRETE + concreteProductNames.get(i)))
+										concreteProductNames.get(i)))
 								.build())
 						.build())
 				.collect(Collectors.toList());

@@ -12,6 +12,7 @@ public class InterpreterGen extends DesignPatternGen {
 	private static final String DATA = "data";
 	private static final String RESULT = "Result";
 	private static final String BOOLEAN = "boolean";
+
 	private String packageName;
 	private String contextName;
 	private String abstractExpressionName;

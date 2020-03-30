@@ -31,9 +31,8 @@ import static java.util.stream.Collectors.toList;
  */
 public class AbstractFactoryGen extends DesignPatternGen {
 
-	private static final String ABSTRACT = "Abstract";
-	private static final String CONCRETE = "Concrete";
 	private static final String CREATE = "create";
+
 	private String packageName;
 	private String abstractFactoryName;
 	private List<String> concreteFactoryNames;
@@ -58,8 +57,7 @@ public class AbstractFactoryGen extends DesignPatternGen {
 
 		Stream<DpSourceMethod> dpCreateAbstractProductMethodStream = products.keySet().stream()
 				.map(this::createAbstractProductMethod);
-		DpInterfaceSource abstractFactory = DpInterfaceSource.newBuilder(this.packageName,
-				ABSTRACT + this.abstractFactoryName)
+		DpInterfaceSource abstractFactory = DpInterfaceSource.newBuilder(this.packageName, this.abstractFactoryName)
 				.setJavadoc("Abstract Factory, defines interface for creation of the abstract product " +
 							"objects")
 				.addMethods(dpCreateAbstractProductMethodStream.collect(toList()))
@@ -74,8 +72,8 @@ public class AbstractFactoryGen extends DesignPatternGen {
 						.collect(toList()))
 				.collect(toList());
 		List<DpClassSource> concreteFactories = IntStream.range(0, concreteFactoryNames.size())
-				.mapToObj(i -> DpClassSource.newBuilder(this.packageName, CONCRETE + concreteFactoryNames.get(i))
-						.addImplementsInterface(ABSTRACT + abstractFactoryName)
+				.mapToObj(i -> DpClassSource.newBuilder(this.packageName, concreteFactoryNames.get(i))
+						.addImplementsInterface(abstractFactoryName)
 						.addMethods(dpCreateConcreteProductMethodStream.get(i)))
 				.map(DpClassSource.Builder::build).collect(toList());
 		dpSources.add(concreteFactories, this.getClass());
@@ -96,17 +94,17 @@ public class AbstractFactoryGen extends DesignPatternGen {
 
 	private DpSourceMethod createAbstractProductMethod(String abstractProductName) {
 		return DpSourceMethod.newBuilder()
-				.setName(CREATE + ABSTRACT + abstractProductName)
+				.setName(CREATE + abstractProductName)
 				.addModifier(DpSourceMethod.Modifier.ABSTRACT)
-				.setReturnType(ABSTRACT + abstractProductName)
+				.setReturnType(abstractProductName)
 				.build();
 	}
 
 	private DpSourceMethod createConcreteProductMethod(String abstractProductName, String concreteProductName) {
 		return DpSourceMethod.newBuilder()
-				.setName(CREATE + ABSTRACT + abstractProductName)
-				.setReturnType(ABSTRACT + abstractProductName)
-				.setBody("return new " + CONCRETE + concreteProductName + "();")
+				.setName(CREATE + abstractProductName)
+				.setReturnType(abstractProductName)
+				.setBody("return new " + concreteProductName + "();")
 				.setIsInherited(Boolean.TRUE)
 				.build();
 	}
@@ -119,14 +117,14 @@ public class AbstractFactoryGen extends DesignPatternGen {
 	}
 
 	private DpInterfaceSource makeDpAbstractProducts(String abstractProductName) {
-		return DpInterfaceSource.newBuilder(this.packageName, ABSTRACT + abstractProductName)
+		return DpInterfaceSource.newBuilder(this.packageName, abstractProductName)
 				.build();
 	}
 
 	private List<DpClassSource> makeDpConcreteProducts(String abstractProductName, List<String> concreteProductNames) {
 		return Arrays.stream(concreteProductNames.toArray()).map(concreteProductName ->
-				DpClassSource.newBuilder(this.packageName, CONCRETE + concreteProductName)
-						.addImplementsInterface(ABSTRACT + abstractProductName)
+				DpClassSource.newBuilder(this.packageName, concreteProductName.toString())
+						.addImplementsInterface(abstractProductName)
 						.setAccessModifier(DpClassSource.AccessModifier.PUBLIC)
 						.build()).collect(toList());
 	}

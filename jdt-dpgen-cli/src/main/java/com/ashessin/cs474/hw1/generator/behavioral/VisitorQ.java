@@ -57,9 +57,9 @@ public class VisitorQ extends DesignPatternQ {
 	static class InputGroup implements ArgGroup {
 
 		private static final String VISITOR_NAME = "Visitor";
-		private static final String CONCRETE_VISITOR_NAMES = "Visitor1,Visitor2";
+		private static final String CONCRETE_VISITOR_NAMES = "ConcreteVisitor1,ConcreteVisitor2";
 		private static final String ELEMENT_NAME = "Element";
-		private static final String CONCRETE_ELEMENT_NAMES = "ElementA,ElementB";
+		private static final String CONCRETE_ELEMENT_NAMES = "ConcreteElementA,ConcreteElementB";
 
 		@CommandLine.Parameters(index = "0", paramLabel = "VisitorName",
 				description = "The Visitor declares a Visit operation for each class ConcreteElements in the object " +
@@ -79,7 +79,7 @@ public class VisitorQ extends DesignPatternQ {
 
 		@CommandLine.Parameters(index = "3", paramLabel = "ConcreteElementNames",
 				description = "The ConcreteElement implements an Accept operation that takes a visitor as an " +
-							  "margument.",
+							  "argument.",
 				defaultValue = CONCRETE_ELEMENT_NAMES)
 		static String concreteElementNames = CONCRETE_ELEMENT_NAMES;
 
