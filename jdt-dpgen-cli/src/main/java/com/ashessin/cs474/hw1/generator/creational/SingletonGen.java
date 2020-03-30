@@ -6,15 +6,15 @@ public class SingletonGen extends DesignPatternGen {
 
 	private String packageName;
 	private String singletonName;
-	private String singletonInstanceName;
-	private String singletonAccessorName;
+	private String singletonInstanceFieldName;
+	private String singletonAccessorMethodName;
 
 	public SingletonGen(String packageName,
-						String singletonName, String singletonInstanceName, String singletonAccessorName) {
+						String singletonName, String singletonInstanceFieldName, String singletonAccessorMethodName) {
 		this.packageName = packageName;
 		this.singletonName = singletonName;
-		this.singletonInstanceName = singletonInstanceName;
-		this.singletonAccessorName = singletonAccessorName;
+		this.singletonInstanceFieldName = singletonInstanceFieldName;
+		this.singletonAccessorMethodName = singletonAccessorMethodName;
 	}
 
 	public DpArrayList<DpSource> main() {
@@ -22,7 +22,7 @@ public class SingletonGen extends DesignPatternGen {
 		DpClassSource singleton = DpClassSource.newBuilder(packageName, singletonName)
 				.setJavadoc("Singleton class implements singleton pattern. Only one object can be " +
 							"instantiated.")
-				.addField(DpSourceField.newBuilder(singletonInstanceName, singletonName)
+				.addField(DpSourceField.newBuilder(singletonInstanceFieldName, singletonName)
 						.setAccessModifier(DpSourceField.AccessModifier.PRIVATE)
 						.addModifier(DpSourceField.Modifier.STATIC)
 						.build())
@@ -31,7 +31,7 @@ public class SingletonGen extends DesignPatternGen {
 						.setAccessModifier(DpSourceMethod.AccessModifier.PRIVATE)
 						.build())
 				.addMethod(DpSourceMethod.newBuilder()
-						.setName(singletonAccessorName)
+						.setName(singletonAccessorMethodName)
 						.addModifier(DpSourceMethod.Modifier.STATIC)
 						.addModifier(DpSourceMethod.Modifier.SYNCHRONIZED)
 						.setReturnType(singletonName)
@@ -40,9 +40,9 @@ public class SingletonGen extends DesignPatternGen {
 								"	%s = new %s();\n" +
 								"}\n" +
 								"return %s;",
-								singletonInstanceName,
-								singletonInstanceName, singletonName,
-								singletonInstanceName))
+								singletonInstanceFieldName,
+								singletonInstanceFieldName, singletonName,
+								singletonInstanceFieldName))
 						.build())
 				.build();
 		dpSources.add(singleton, this.getClass());

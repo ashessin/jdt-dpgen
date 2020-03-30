@@ -36,20 +36,21 @@ public class SingletonQ extends DesignPatternQ {
 	@Override
 	public DpArrayList<DpSource> call() throws Exception {
 		String singletonName = InputGroup.singletonName;
-		String singletonInstanceName = InputGroup.singletonInstanceName;
-		String singletonAccessorName = InputGroup.singletonAccessorName;
+		String singletonInstanceFieldName = InputGroup.singletonInstanceFieldName;
+		String singletonAccessorMethodName = InputGroup.singletonAccessorMethodName;
 
 		// TODO: Add input validations
 
 		log.info("Generating representation for design pattern sources.");
-		return new SingletonGen(packageName, singletonName, singletonInstanceName, singletonAccessorName).invoke();
+		return new SingletonGen(packageName, singletonName, singletonInstanceFieldName, singletonAccessorMethodName)
+			.invoke();
 	}
 
 	static class InputGroup implements ArgGroup {
 
 		private static final String SINGLETON_NAME = "Singleton";
-		private static final String SINGLETON_INSTANCE_NAME = "instance";
-		private static final String SINGLETON_ACCESSOR_NAME = "get" + SINGLETON_INSTANCE_NAME;
+		private static final String SINGLETON_INSTANCE_FIELD_NAME = "instance";
+		private static final String SINGLETON_ACCESSOR_METHOD_NAME = "get" + SINGLETON_INSTANCE_FIELD_NAME;
 
 		@CommandLine.Parameters(index = "0", paramLabel = "SingletonName",
 				description = "The singleton class should have only one active instance at any time.",
@@ -57,12 +58,12 @@ public class SingletonQ extends DesignPatternQ {
 		static String singletonName = SINGLETON_NAME;
 
 		@CommandLine.Parameters(index = "1", paramLabel = "SingletonInstanceName",
-				defaultValue = SINGLETON_INSTANCE_NAME)
-		static String singletonInstanceName = SINGLETON_INSTANCE_NAME;
+				defaultValue = SINGLETON_INSTANCE_FIELD_NAME)
+		static String singletonInstanceFieldName = SINGLETON_INSTANCE_FIELD_NAME;
 
 		@CommandLine.Parameters(index = "2", paramLabel = "SingletonAccessorName",
-				defaultValue = SINGLETON_ACCESSOR_NAME)
-		static String singletonAccessorName = SINGLETON_ACCESSOR_NAME;
+				defaultValue = SINGLETON_ACCESSOR_METHOD_NAME)
+		static String singletonAccessorMethodName = SINGLETON_ACCESSOR_METHOD_NAME;
 
 		private InputGroup() {
 		}
