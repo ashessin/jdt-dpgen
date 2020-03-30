@@ -5,7 +5,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.ValidationInfo;
-import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,6 +30,7 @@ public class DpGenerateDialogWrapper extends DialogWrapper {
 	 * @param project parent window for the dialog will be calculated based on focused window for the
 	 *                specified {@code project}. This parameter can be {@code null}. In this case parent window
 	 *                will be suggested based on current focused window.
+	 *
 	 * @throws IllegalStateException if the dialog is invoked not on the event dispatch thread
 	 * @see DialogWrapper#DialogWrapper(Project, boolean)
 	 */
@@ -80,8 +80,8 @@ public class DpGenerateDialogWrapper extends DialogWrapper {
 				} else {
 					String[] identifierNames = textField.getText().split("[,;]");
 					List<String> disctinctIdentifierNames = Arrays.stream(identifierNames)
-						.distinct()
-						.collect(Collectors.toList());
+							.distinct()
+							.collect(Collectors.toList());
 
 					if (disctinctIdentifierNames.stream().anyMatch(SourceVersion::isKeyword) ||
 						!disctinctIdentifierNames.stream().allMatch(SourceVersion::isIdentifier)) {

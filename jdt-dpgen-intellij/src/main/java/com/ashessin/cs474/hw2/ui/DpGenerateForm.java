@@ -6,7 +6,6 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.util.ui.JBUI;
-import org.apache.xmlbeans.impl.jam.JField;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -87,12 +86,12 @@ public class DpGenerateForm {
 		});
 	}
 
-	public Map<JLabel, JTextField> getParameters() {
-		return parameters;
-	}
-
 	public static Map<String, Map<String, String>> retriveDesignPatterns() {
 		return designPatterns;
+	}
+
+	public Map<JLabel, JTextField> getParameters() {
+		return parameters;
 	}
 
 	public JRadioButton retriveSelectDpRadioButton() {
@@ -120,9 +119,9 @@ public class DpGenerateForm {
 			String[] command = (Objects.requireNonNull(selectDpComboBox.getSelectedItem()).toString()
 										.replace(" ", "")
 										.toLowerCase() + " " + parameters.values().stream()
-												.map(JTextComponent::getText)
-												.collect(Collectors.joining(" ")))
-				.split(" ");
+										.map(JTextComponent::getText)
+										.collect(Collectors.joining(" ")))
+					.split(" ");
 			dpGenerate.setCommand(command);
 		} else {
 			dpGenerate.setCommand(useCommandTextField.getText().split(" "));

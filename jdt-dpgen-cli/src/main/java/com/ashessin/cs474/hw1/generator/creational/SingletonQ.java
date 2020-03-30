@@ -43,7 +43,7 @@ public class SingletonQ extends DesignPatternQ {
 
 		log.info("Generating representation for design pattern sources.");
 		return new SingletonGen(packageName, singletonName, singletonInstanceFieldName, singletonAccessorMethodName)
-			.invoke();
+				.invoke();
 	}
 
 	static class InputGroup implements ArgGroup {
