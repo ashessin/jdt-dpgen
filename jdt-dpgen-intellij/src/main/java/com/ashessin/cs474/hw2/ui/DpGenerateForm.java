@@ -171,7 +171,6 @@ public class DpGenerateForm {
 					null, new Dimension(200, -1), null, 0, false));
 			textField.setText(fieldText);
 
-			int i = row;
 			parameters.put(label, textField);
 			textField.getDocument().addDocumentListener(new DocumentListener() {
 				@Override
