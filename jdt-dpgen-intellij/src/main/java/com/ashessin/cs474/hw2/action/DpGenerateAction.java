@@ -67,6 +67,8 @@ public class DpGenerateAction extends AnAction {
 		if (getInstance().getPackageInSources(selectedDir) == null) {
 			log.debug("Hiding: ", this.getClass().getSimpleName());
 			event.getPresentation().setEnabledAndVisible(false);
+		} else {
+			DpGenerate.INSTANCE.setPackageDirectory(selectedDir);
 		}
 	}
 
@@ -80,9 +82,8 @@ public class DpGenerateAction extends AnAction {
 		log.info(" Call to DpGenerateAction.actionPerformed.");
 		Project project = event.getProject();
 		DpGenerateDialogWrapper dpGenerateDialogWrapper = new DpGenerateDialogWrapper(project);
-		dpGenerateDialogWrapper.show();
 
-		if (dpGenerateDialogWrapper.isOK()) {
+		if (dpGenerateDialogWrapper.showAndGet()) {
 			String[] command = DpGenerate.INSTANCE.getCommand();
 			String cmd = String.join(" ", command);
 			log.debug("Executing: ", cmd);
