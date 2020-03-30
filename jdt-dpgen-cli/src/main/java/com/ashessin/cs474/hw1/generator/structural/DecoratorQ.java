@@ -57,7 +57,7 @@ public class DecoratorQ extends DesignPatternQ {
 	static class InputGroup implements ArgGroup {
 
 		private static final String DECORATOR_NAME = "Decorator";
-		private static final String CONCRETE_DECORATOR_NAMES = "DecoratorA,DecoratorB";
+		private static final String CONCRETE_DECORATOR_NAMES = "ConcreteDecoratorA,ConcreteDecoratorB";
 		private static final String COMPONENT_NAME = "Component";
 		private static final String CONCRETE_COMPONENT_NAME = "Concrete" + COMPONENT_NAME;
 
