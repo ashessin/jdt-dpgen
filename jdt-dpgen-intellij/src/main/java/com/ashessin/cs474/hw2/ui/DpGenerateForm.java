@@ -32,13 +32,17 @@ public class DpGenerateForm {
 	private JPanel fieldsPanel;
 	private JRadioButton useCommandRadioButton;
 	private JTextField useCommandTextField;
+	private ButtonGroup radioButtonGroup;
 
-	public DpGenerateForm(DpGenerate dpGenerate) {
-		log.debug("Creating: ", this.getClass().getSimpleName());
+	public DpGenerateForm(DpGenerate dpGenerate, DpGenerateDialogWrapper dpGenerateDialogWrapper) {
+		log.debug("Populating Design Pattern Generator dialog.");
 		this.dpGenerate = dpGenerate;
 
 		// on select dropdown radio button action
 		selectDpRadioButton.addActionListener(actionEvent -> {
+			// enable 'OK' button
+			if (dpGenerateDialogWrapper != null)
+				dpGenerateDialogWrapper.setOKActionEnabled(true);
 			// disable command
 			useCommandRadioButton.setSelected(false);
 			useCommandTextField.setEnabled(false);
@@ -57,6 +61,9 @@ public class DpGenerateForm {
 
 		// on select command radio button action
 		useCommandRadioButton.addActionListener(actionEvent -> {
+			// enable 'OK' button
+			if (dpGenerateDialogWrapper != null)
+				dpGenerateDialogWrapper.setOKActionEnabled(true);
 			// disable dropdown
 			selectDpRadioButton.setSelected(false);
 			selectDpComboBox.setEnabled(false);

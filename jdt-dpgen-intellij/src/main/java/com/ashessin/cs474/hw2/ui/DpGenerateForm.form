@@ -91,7 +91,7 @@
     </children>
   </grid>
   <buttonGroups>
-    <group name="radioButtonGroup1">
+    <group name="radioButtonGroup" bound="true">
       <member id="26d02"/>
       <member id="ec925"/>
     </group>

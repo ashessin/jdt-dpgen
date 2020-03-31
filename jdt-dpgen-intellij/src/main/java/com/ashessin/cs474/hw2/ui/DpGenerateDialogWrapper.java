@@ -35,11 +35,17 @@ public class DpGenerateDialogWrapper extends DialogWrapper {
 	 */
 	public DpGenerateDialogWrapper(@Nullable Project project) {
 		super(project);
-		log.info("Showing Design Pattern Generator dialog.");
-		dpGenerateForm = new DpGenerateForm(DpGenerate.INSTANCE);
+		// initially keep the 'OK' (default) button disabled
+		this.setOKActionEnabled(false);
+		log.info("Creating Design Pattern Generator dialog.");
+		dpGenerateForm = new DpGenerateForm(DpGenerate.INSTANCE, this);
 		init();
 		setTitle("Design Pattern Generator");
 		log.info("Design Pattern Generator dialog is ready.");
+	}
+
+	protected DpGenerateForm getDpGenerateForm() {
+		return dpGenerateForm;
 	}
 
 	/**
