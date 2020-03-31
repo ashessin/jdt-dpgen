@@ -66,9 +66,27 @@ public class DpGenerateDialogWrapper extends DialogWrapper {
 	@NotNull
 	@Override
 	protected List<ValidationInfo> doValidateAll() {
+		List<ValidationInfo> validationInfos = new ArrayList<>(1);
+
+		if (dpGenerateForm.retriveSelectDpRadioButton().isSelected()) {
+			validateSelectDp(validationInfos);
+		} else if (dpGenerateForm.retriveUseCommandRadioButton().isSelected()) {
+			validateUseCommand(validationInfos);
+		}
+
+		return validationInfos;
+	}
+
+	private void validateUseCommand(List<ValidationInfo> validationInfos) {
+		JTextField useCommandTextField = dpGenerateForm.retriveUseCommandTextField();
+		if (useCommandTextField.getText().isEmpty()) {
+			validationInfos.add(new ValidationInfo("Command can not be empty!", useCommandTextField));
+		}
+	}
+
+	private void validateSelectDp(List<ValidationInfo> validationInfos) {
 		// only target class/interface name checking
 		String[] skipValidate = {"PROPERTIES", "FIELD", "METHOD"};
-		List<ValidationInfo> validationInfos = new ArrayList<>(1);
 		Set<String> allDistinctIdentifiers = new HashSet<>(1);
 
 		dpGenerateForm.getParameters().forEach((label, textField) -> {
@@ -85,7 +103,6 @@ public class DpGenerateDialogWrapper extends DialogWrapper {
 						disctinctIdentifiersInField);
 			}
 		});
-		return validationInfos;
 	}
 
 	private void checkNameValidity(List<ValidationInfo> validateInfos, JTextField textField,
