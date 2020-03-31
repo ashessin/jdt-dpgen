@@ -83,7 +83,7 @@ public class DpGenerateAction extends AnAction {
 		Project project = event.getProject();
 		DpGenerateDialogWrapper dpGenerateDialogWrapper = new DpGenerateDialogWrapper(project);
 
-		if (dpGenerateDialogWrapper.showAndGet()) {
+		if (dpGenerateDialogWrapper.showAndGet() && DpGenerate.INSTANCE.getCommand() != null) {
 			String[] command = DpGenerate.INSTANCE.getCommand();
 			String cmd = String.join(" ", command);
 			log.debug("Executing: ", cmd);
