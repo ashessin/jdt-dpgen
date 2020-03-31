@@ -26,8 +26,9 @@ INDEX
     + [4.2 GUI Sub-Project `jdt-dpgen-intellij`](#42-gui-sub-project-jdt-dpgen-intellij)
         - [4.2.1 Designing GUI](#421-designing-gui)
         - [4.2.2 Creating a modal dialog](#422-creating-a-modal-dialog)
-        - [4.2.3 Setting up model for data exchange](#423-setting-up-model-for-data-exchange)
-        - [4.2.4 Creating a custom IntelliJ action](#424-creating-a-custom-intellij-action)
+        - [4.2.3 Validating user input and detecting name clashes](#423-validating-user-input-and-detecting-name-clashes)
+        - [4.2.4 Setting up model for data exchange](#424-setting-up-model-for-data-exchange)
+        - [4.2.5 Creating a custom IntelliJ action](#425-creating-a-custom-intellij-action)
 5. [Setup Instructions](#5-setup-instructions)
 6. [Usage Details](#6-usage-details)
     + [6.1 CLI](#61-cli)
@@ -535,16 +536,32 @@ extend the [`com.intellij.openapi.ui.DialogWrapper`](https://www.jetbrains.org/i
 class through `com.ashessin.cs474.hw2.ui.DpGenerateDialogWrapper` and it takes care of initializing 
 the form.
 
+#### 4.2.3 Validating user input and detecting name clashes
 
-#### 4.2.3 Setting up model for data exchange
+Since the form accepts user input, there's a chance that the provided values (names for reference types) may be invalid.
+We can check for this by doing input validation via `com.intellij.openapi.ui.DialogWrapper.doValidateAll` method.
+Some text field validations that are currently implemented:
 
-The UI Form `com.ashessin.cs474.hw2.ui.DpGenerateForm` and Action class (discussed in next section) 
-do not interact directly but make use of a POJO `com.ashessin.cs474.hw2.model.DpGenerate`. The form
-class updates an instance of this class with the command (formed based on user input) to be used by the 
-`com.ashessin.cs474.hw2.action.DpGenerateAction` class.
+  - empty field check  
+  ![validation-1](jdt-dpgen-intellij/etc/validation-1.png)
+  - check for invalid reference type (class/interface) names (eg. `Some.InVal@iDReferenceTyp3Name` for a class)  
+  ![validation-1](jdt-dpgen-intellij/etc/validation-3.png)
+  - check for name clashing; ie. duplicate reference type (class/interface) names in same field, 
+  across multiple fields, and within selected package  
+  ![validation-1](jdt-dpgen-intellij/etc/validation-2.png) ![validation-1](jdt-dpgen-intellij/etc/validation-4.png)
 
 
-#### 4.2.4 Creating a custom IntelliJ action
+#### 4.2.4 Setting up model for data exchange
+
+The UI classes and Action class (discussed in next section) do not interact directly but make use of
+a POJO `com.ashessin.cs474.hw2.model.DpGenerate`. The action class updates an instance of this 
+class with the selected java package (on which the action was triggered) to be used by 
+`com.intellij.openapi.ui.DialogWrapper` class for validation (name clash checking).Whereas the form 
+class updates the same instance with the command (formed based on user input) to be used by the 
+`com.ashessin.cs474.hw2.action.DpGenerateAction` class in return. 
+
+
+#### 4.2.5 Creating a custom IntelliJ action
 
 The plugin dialog box must appear only on some user action. To accomplish this we
 extend the [`com.intellij.openapi.actionSystem.AnAction`](https://www.jetbrains.org/intellij/sdk/docs/tutorials/action_system/working_with_custom_actions.html#creating-a-custom-action), 
