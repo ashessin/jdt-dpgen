@@ -16,16 +16,16 @@ public class DpInterfaceSourceTest {
 	@Test
 	public void interfaceWithPrivateMethod() {
 		Assertions.assertThrows(IllegalStateException.class, () ->
-			DpInterfaceSource.newBuilder("com.test", "TestInterface")
-				.addMethod(DpSourceMethod.newBuilder()
-					.setAccessModifier(DpSourceMethod.AccessModifier.PRIVATE)
-					.build())
-				.build());
+				DpInterfaceSource.newBuilder("com.test", "TestInterface")
+						.addMethod(DpSourceMethod.newBuilder()
+								.setAccessModifier(DpSourceMethod.AccessModifier.PRIVATE)
+								.build())
+						.build());
 		Assertions.assertThrows(IllegalStateException.class, () ->
-			DpInterfaceSource.newBuilder("com.test", "TestInterface")
-				.addMethod(DpSourceMethod.newBuilder()
-					.setAccessModifier(DpSourceMethod.AccessModifier.PROTECTED)
-					.build())
-				.build());
+				DpInterfaceSource.newBuilder("com.test", "TestInterface")
+						.addMethod(DpSourceMethod.newBuilder()
+								.setAccessModifier(DpSourceMethod.AccessModifier.PROTECTED)
+								.build())
+						.build());
 	}
 }
