@@ -21,7 +21,7 @@ class DpGenerateFormTest {
 	@BeforeEach
 	void setUp() {
 		dpGenerate = DpGenerate.INSTANCE;
-		dpGenerateForm = new DpGenerateForm(dpGenerate);
+		dpGenerateForm = new DpGenerateForm(dpGenerate, null);
 		frame.setContentPane(dpGenerateForm.getContent());
 		frame.pack();
 	}
