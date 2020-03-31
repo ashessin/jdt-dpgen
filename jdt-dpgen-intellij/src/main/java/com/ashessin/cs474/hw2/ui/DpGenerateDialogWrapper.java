@@ -12,7 +12,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.lang.model.SourceVersion;
 import javax.swing.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Dialog wrapper for containing {@link DpGenerateForm}.
@@ -69,44 +68,55 @@ public class DpGenerateDialogWrapper extends DialogWrapper {
 	protected List<ValidationInfo> doValidateAll() {
 		// only target class/interface name checking
 		String[] skipValidate = {"PROPERTIES", "FIELD", "METHOD"};
+		List<ValidationInfo> validationInfos = new ArrayList<>(1);
+		Set<String> allDistinctIdentifiers = new HashSet<>(1);
 
-		List<ValidationInfo> validateInfos = new ArrayList<>(1);
-		Set<String> allIdentifierNames = new HashSet<>(1);
-		// TODO: Simplify
 		dpGenerateForm.getParameters().forEach((label, textField) -> {
-			if (Arrays.stream(skipValidate).noneMatch(s -> label.getText().contains(s))) {
-				if (textField.getText().trim().isEmpty()) {
-					validateInfos.add(new ValidationInfo("This field can not be empty!", textField));
-				} else {
-					String[] identifierNames = textField.getText().split("[,;]");
-					List<String> disctinctIdentifierNames = Arrays.stream(identifierNames)
-							.distinct()
-							.collect(Collectors.toList());
+			if (textField.getText().trim().isEmpty()) {
+				// all fields are mandatory and can not be empty
+				validationInfos.add(new ValidationInfo("This field can not be empty!", textField));
+			} else if (Arrays.stream(skipValidate).noneMatch(s -> label.getText().contains(s))) {
+				String[] identifiersInField = textField.getText().split("[,;]");
+				Set<String> disctinctIdentifiersInField = new HashSet<>(Arrays.asList(identifiersInField));
 
-					if (disctinctIdentifierNames.stream().anyMatch(SourceVersion::isKeyword) ||
-						!disctinctIdentifierNames.stream().allMatch(SourceVersion::isIdentifier)) {
-						validateInfos.add(new ValidationInfo("Please use valid identifiers!", textField));
-					}
+				checkNameValidity(validationInfos, textField, disctinctIdentifiersInField);
 
-					if (identifierNames.length != disctinctIdentifierNames.size()) {
-						validateInfos.add(new ValidationInfo("Please use unique names!", textField));
-					}
-					disctinctIdentifierNames.forEach(s -> {
-						if (!allIdentifierNames.add(s + ".java")) {
-							validateInfos.add(new ValidationInfo("Please use unique names!", textField));
-						}
-					});
-
-					Arrays.stream(DpGenerate.INSTANCE.getPackageDirectory().getFiles()).forEach(psiFile -> {
-						if (psiFile instanceof PsiJavaFile &&
-							allIdentifierNames.contains(psiFile.getName())) {
-							String msg = "File named " + psiFile.getName() + " already exists in selected package.";
-							validateInfos.add(new ValidationInfo(msg, textField));
-						}
-					});
-				}
+				checkForDuplicate(validationInfos, allDistinctIdentifiers, textField, identifiersInField,
+						disctinctIdentifiersInField);
 			}
 		});
-		return validateInfos;
+		return validationInfos;
+	}
+
+	private void checkNameValidity(List<ValidationInfo> validateInfos, JTextField textField,
+								   Set<String> disctinctIdentifiersInField) {
+		// name should not be a keyword and be syntactically valid identifier in java
+		if (disctinctIdentifiersInField.stream().anyMatch(SourceVersion::isKeyword) ||
+			!disctinctIdentifiersInField.stream().allMatch(SourceVersion::isIdentifier)) {
+			validateInfos.add(new ValidationInfo("Please use valid identifiers!", textField));
+		}
+	}
+
+	private void checkForDuplicate(List<ValidationInfo> validateInfos, Set<String> allDistinctIdentifiers,
+								   JTextField textField, String[] identifiersInField,
+								   Set<String> disctinctIdentifiersInField) {
+		// name clash within the same text field
+		if (identifiersInField.length != disctinctIdentifiersInField.size()) {
+			validateInfos.add(new ValidationInfo("Please use unique names!", textField));
+		}
+		// name clash across two different text fields
+		disctinctIdentifiersInField.forEach(s -> {
+			if (!allDistinctIdentifiers.add(s + ".java")) {
+				validateInfos.add(new ValidationInfo("Please use unique names!", textField));
+			}
+		});
+		// name clash between text field and reference types already in current package/subpackage
+		Arrays.stream(DpGenerate.INSTANCE.getPackageDirectory().getFiles()).forEach(psiFile -> {
+			if (psiFile instanceof PsiJavaFile &&
+				allDistinctIdentifiers.contains(psiFile.getName())) {
+				String msg = "File named " + psiFile.getName() + " already exists in selected package.";
+				validateInfos.add(new ValidationInfo(msg, textField));
+			}
+		});
 	}
 }
